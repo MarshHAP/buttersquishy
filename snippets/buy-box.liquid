@@ -20,6 +20,11 @@
 {%- assign now_secs = 'now' | date: '%s' | plus: 0 -%}
 {%- assign arrives = now_secs | plus: lead_secs | date: '%B %-d' -%}
 {%- assign tag = heading_tag | default: 'h2' -%}
+{%- case default_tier -%}
+  {%- when '2' -%}{%- assign initial_price = tier2 -%}{%- assign initial_compare = compare2 -%}
+  {%- when '3' -%}{%- assign initial_price = tier3 -%}{%- assign initial_compare = compare3 -%}
+  {%- else -%}{%- assign initial_price = unit -%}{%- assign initial_compare = compare -%}
+{%- endcase -%}
 
 <div class="buy-box" id="buy" data-buy-box data-variant-id="{{ variant.id }}" data-unit-price="{{ unit }}" data-tier2-price="{{ tier2 }}" data-tier3-price="{{ tier3 }}" data-compare-price="{{ compare }}">
   <div class="buy-box__rating">
@@ -60,7 +65,7 @@
 
   <button type="button" class="btn btn--full btn--large buy-box__add" data-buy-add {% unless variant.available %}disabled{% endunless %}>
     {%- if variant.available -%}
-      Add To Cart — <span data-buy-price>{{ unit | money }}</span> <s data-buy-compare>{{ compare | money }}</s>
+      Add To Cart — <span data-buy-price>{{ initial_price | money }}</span> <s data-buy-compare {% unless initial_compare > initial_price %}hidden{% endunless %}>{{ initial_compare | money }}</s>
     {%- else -%}
       Sold out
     {%- endif -%}
