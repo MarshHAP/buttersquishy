@@ -70,8 +70,7 @@
     }, interval);
   });
 
-  /* Swap the product gallery's main image (used when a variant tile is tapped).
-     The main img carries a srcset for responsive loading; a srcset always wins
+  /* Swap the product gallery's main image. The main img carries a srcset for responsive loading; a srcset always wins
      over a JS-set src, so it must be removed when swapping. */
   function setGalleryMain(main, fullUrl, alt) {
     main.removeAttribute('srcset');
@@ -80,171 +79,52 @@
     if (alt) main.alt = alt;
   }
 
-  function showVariantImage(fullUrl, name) {
-    var main = document.querySelector('[data-gallery-main] img');
-    if (!main) return;
-    setGalleryMain(main, fullUrl, name);
-    var matched = false;
-    document.querySelectorAll('[data-gallery-thumb]').forEach(function (t) {
-      /* Shopify CDN URLs for the same image share a path before the query string. */
-      var same = t.dataset.full && t.dataset.full.split('?')[0] === fullUrl.split('?')[0];
-      t.classList.toggle('is-active', same);
-      if (same && !matched) {
-        matched = true;
-        if (t.scrollIntoView) t.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-      }
-    });
-  }
-
   /* ------------------------------------------------------------------ */
-  /* Bundle builder — tiered pricing: 1 = unit, any 2 = tier2, any 3 = tier3 */
+  /* Buy box — Buy One / Two / Three tiers                               */
   /* ------------------------------------------------------------------ */
-  document.querySelectorAll('[data-bundle]').forEach(function (box) {
-    var unitPrice = parseInt(box.dataset.unitPrice, 10); /* pence */
-    var tier2 = parseInt(box.dataset.tier2Price, 10) || unitPrice * 2;
-    var tier3 = parseInt(box.dataset.tier3Price, 10) || unitPrice * 3;
-    var bundleSize = 3;
-    var tiles = Array.prototype.slice.call(box.querySelectorAll('.bundle-tile'));
-    var slotsWrap = box.querySelector('[data-bundle-slots]');
-    var countLabel = box.querySelector('[data-bundle-count]');
-    var savingLabel = box.querySelector('[data-bundle-saving]');
-    var totalWrap = box.querySelector('[data-bundle-total]');
-    var addBtn = box.querySelector('[data-bundle-add]');
-    var errorEl = box.querySelector('[data-bundle-error]');
+  document.querySelectorAll('[data-buy-box]').forEach(function (box) {
+    var variantId = parseInt(box.dataset.variantId, 10);
+    var tiers = Array.prototype.slice.call(box.querySelectorAll('[data-tier]'));
+    var addBtn = box.querySelector('[data-buy-add]');
+    var priceEl = box.querySelector('[data-buy-price]');
+    var compareEl = box.querySelector('[data-buy-compare]');
+    var errorEl = box.querySelector('[data-buy-error]');
 
-    var selection = {}; /* variantId -> {qty, name, image, emoji} */
-
-    /* Mirrors the store's automatic discounts: "any 3" applies to every
-       group of three; "any 2" applies only when no group of three exists. */
-    function priceFor(n) {
-      var triples = Math.floor(n / bundleSize);
-      var rem = n % bundleSize;
-      if (triples === 0 && rem === 2) return tier2;
-      return triples * tier3 + rem * unitPrice;
-    }
-
-    tiles.forEach(function (tile) {
-      tile.addEventListener('click', function (e) {
-        if (e.target.closest('.bundle-tile__minus')) return;
-        change(tile, 1);
-      });
-      var minus = tile.querySelector('.bundle-tile__minus');
-      if (minus) {
-        minus.addEventListener('click', function (e) {
-          e.stopPropagation();
-          change(tile, -1);
-        });
-      }
-    });
-
-    function change(tile, delta) {
-      var id = tile.dataset.variantId;
-      var current = selection[id] ? selection[id].qty : 0;
-      var next = Math.max(0, current + delta);
-      if (delta > 0 && tile.dataset.variantImageFull) {
-        showVariantImage(tile.dataset.variantImageFull, tile.dataset.variantName);
-      }
-      if (next === 0) {
-        delete selection[id];
-      } else {
-        selection[id] = {
-          qty: next,
-          name: tile.dataset.variantName,
-          image: tile.dataset.variantImage || '',
-          emoji: tile.dataset.variantEmoji || '🧸'
-        };
-      }
-      render();
-    }
-
-    function totalQty() {
-      return Object.keys(selection).reduce(function (sum, id) { return sum + selection[id].qty; }, 0);
+    function selected() {
+      var input = box.querySelector('input[name="tier"]:checked') || box.querySelector('input[name="tier"]');
+      return input;
     }
 
     function render() {
-      var qty = totalQty();
-      var fullPrice = qty * unitPrice;
-      var payPrice = priceFor(qty);
-      var saving = fullPrice - payPrice;
-
-      tiles.forEach(function (tile) {
-        var id = tile.dataset.variantId;
-        var q = selection[id] ? selection[id].qty : 0;
-        tile.classList.toggle('is-selected', q > 0);
-        var badge = tile.querySelector('.bundle-tile__qty');
-        if (badge) badge.textContent = q;
-      });
-
-      var slotTarget = Math.max(bundleSize, Math.ceil(qty / bundleSize) * bundleSize || bundleSize);
-
-      if (slotsWrap) {
-        var flat = [];
-        Object.keys(selection).forEach(function (id) {
-          for (var i = 0; i < selection[id].qty; i++) flat.push(selection[id]);
-        });
-        var slotCount = Math.min(slotTarget, bundleSize * 3);
-        var html = '';
-        for (var s = 0; s < slotCount; s++) {
-          var item = flat[s];
-          if (item) {
-            html += '<div class="bundle-progress__slot is-filled" title="Tap to remove">' +
-              (item.image ? '<img src="' + item.image + '" alt="' + item.name + '">' : '<span>' + item.emoji + '</span>') +
-              '</div>';
-          } else {
-            html += '<div class="bundle-progress__slot"><span style="opacity:.35">+</span></div>';
-          }
-        }
-        slotsWrap.innerHTML = html;
-      }
-
-      if (countLabel) countLabel.textContent = 'Your bundle · ' + qty + ' of ' + slotTarget;
-      if (savingLabel) {
-        var msg = '';
-        if (qty === 1) {
-          msg = 'Add 1 more — any 2 for ' + formatMoney(tier2);
-        } else if (qty === 2) {
-          msg = 'Saving ' + formatMoney(saving) + ' · add 1 more for any 3 at ' + formatMoney(tier3);
-        } else if (qty >= 3 && saving > 0) {
-          msg = 'Saving ' + formatMoney(saving) + ' 🎉';
-        }
-        savingLabel.textContent = msg;
-        savingLabel.hidden = msg === '';
-      }
-
-      if (totalWrap) {
-        if (qty === 0) {
-          totalWrap.innerHTML = '<span>Pick your squishies above</span><span class="bundle-total__pay">' + formatMoney(unitPrice) + ' <small style="font-weight:400;font-size:1.3rem;">each</small></span>';
-        } else if (saving > 0) {
-          totalWrap.innerHTML = '<span>Total</span><span><span class="bundle-total__was">' + formatMoney(fullPrice) + '</span><span class="bundle-total__pay">' + formatMoney(payPrice) + '</span></span>';
-        } else {
-          totalWrap.innerHTML = '<span>Total</span><span class="bundle-total__pay">' + formatMoney(payPrice) + '</span>';
-        }
-      }
-
-      if (addBtn) {
-        addBtn.disabled = qty === 0;
-        if (qty === 0) {
-          addBtn.textContent = 'Tap a squishy to start your bundle';
-        } else if (saving > 0) {
-          addBtn.textContent = 'Add bundle to basket — ' + formatMoney(payPrice);
-        } else {
-          addBtn.textContent = 'Add ' + qty + ' to basket — ' + formatMoney(payPrice);
-        }
+      var input = selected();
+      if (!input) return;
+      tiers.forEach(function (t) { t.classList.toggle('is-selected', t.contains(input)); });
+      var price = parseInt(input.dataset.price, 10);
+      var compare = parseInt(input.dataset.compare, 10);
+      if (priceEl) priceEl.textContent = formatMoney(price);
+      if (compareEl) {
+        compareEl.textContent = formatMoney(compare);
+        compareEl.hidden = !(compare > price);
       }
     }
 
+    tiers.forEach(function (t) {
+      var input = t.querySelector('input[name="tier"]');
+      if (input) input.addEventListener('change', render);
+    });
+
     if (addBtn) {
       addBtn.addEventListener('click', function () {
-        var items = Object.keys(selection).map(function (id) {
-          return { id: parseInt(id, 10), quantity: selection[id].qty };
-        });
-        if (!items.length) return;
+        var input = selected();
+        var qty = input ? parseInt(input.value, 10) : 1;
         addBtn.disabled = true;
+        var original = addBtn.innerHTML;
         addBtn.textContent = 'Adding…';
+        if (errorEl) errorEl.style.display = 'none';
         fetch('/cart/add.js', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items: items })
+          body: JSON.stringify({ items: [{ id: variantId, quantity: qty }] })
         })
           .then(function (r) {
             if (!r.ok) return r.json().then(function (d) { throw new Error(d.description || 'Could not add to basket'); });
@@ -261,13 +141,167 @@
               errorEl.style.display = 'block';
             }
             addBtn.disabled = false;
-            render();
+            addBtn.innerHTML = original;
           });
       });
     }
 
     render();
   });
+
+  /* ------------------------------------------------------------------ */
+  /* Squeeze Me — tap to dimple, slow rise back                          */
+  /* ------------------------------------------------------------------ */
+  function squeezeAt(body, clientX, clientY) {
+    var rect = body.getBoundingClientRect();
+    var x = ((clientX - rect.left) / rect.width) * 100;
+    var y = ((clientY - rect.top) / rect.height) * 100;
+    var dimples = body.querySelector('[data-dimples]');
+    if (dimples) {
+      var d = document.createElement('span');
+      d.className = 'squeeze__dimple';
+      d.style.left = x + '%';
+      d.style.top = y + '%';
+      dimples.appendChild(d);
+      d.addEventListener('animationend', function () { d.remove(); });
+    }
+    /* squash toward the touch point, then rise back slowly */
+    body.style.transformOrigin = x + '% ' + y + '%';
+    body.classList.remove('is-rising');
+    body.style.transform = 'scale(1.06, 0.9)';
+    var wrap = body.closest('[data-squeeze]');
+    if (wrap) wrap.classList.add('is-squeezing');
+    clearTimeout(body._rise);
+    body._rise = setTimeout(function () {
+      body.classList.add('is-rising');
+      body.style.transform = '';
+      if (wrap) setTimeout(function () { wrap.classList.remove('is-squeezing'); }, 2600);
+    }, 130);
+    if (navigator.vibrate) { try { navigator.vibrate(12); } catch (e) {} }
+  }
+
+  function makeSqueezable(body) {
+    body.addEventListener('pointerdown', function (e) {
+      if (body._dragging) return;
+      squeezeAt(body, e.clientX, e.clientY);
+    });
+    body.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        var r = body.getBoundingClientRect();
+        squeezeAt(body, r.left + r.width / 2, r.top + r.height / 2);
+      }
+    });
+  }
+  document.querySelectorAll('[data-squeeze] [data-squeeze-body]').forEach(makeSqueezable);
+
+  /* ------------------------------------------------------------------ */
+  /* See Me — rear camera + draggable, pinchable, squeezable butter      */
+  /* ------------------------------------------------------------------ */
+  (function () {
+    var ar = document.querySelector('[data-ar]');
+    if (!ar) return;
+    var video = ar.querySelector('[data-ar-video]');
+    var stage = ar.querySelector('[data-ar-stage]');
+    var butter = ar.querySelector('[data-ar-butter]');
+    var body = ar.querySelector('[data-squeeze-body]');
+    var img = ar.querySelector('[data-ar-img]');
+    var msg = ar.querySelector('[data-ar-msg]');
+    var stream = null;
+    var pos = { x: 0, y: 0, scale: 1 };
+    var pointers = {};
+    var gesture = null;
+
+    function apply() {
+      butter.style.transform = 'translate(-50%, -50%) translate(' + pos.x + 'px, ' + pos.y + 'px) scale(' + pos.scale + ')';
+    }
+
+    function open(src) {
+      if (src) img.src = src;
+      pos = { x: 0, y: 0, scale: 1 };
+      apply();
+      ar.classList.add('is-open');
+      ar.classList.remove('has-error');
+      ar.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        return fail('Your browser can’t open the camera here. Try Safari or Chrome on your phone.');
+      }
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false })
+        .then(function (s) {
+          stream = s;
+          video.srcObject = s;
+          return video.play();
+        })
+        .catch(function () {
+          fail('We need camera access to show the butter in your room. Allow the camera and try again.');
+        });
+    }
+
+    function fail(text) {
+      msg.textContent = text;
+      ar.classList.add('has-error');
+    }
+
+    function close() {
+      ar.classList.remove('is-open');
+      ar.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
+      video.srcObject = null;
+    }
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-seeme-open]');
+      if (btn) {
+        var play = btn.closest('[data-play]');
+        open(play ? play.dataset.butterSrc : '');
+      }
+      if (e.target.closest('[data-ar-close]')) close();
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ar.classList.contains('is-open')) close(); });
+
+    /* Gestures on the stage: 1 pointer = drag (or tap → squeeze), 2 pointers = pinch to resize */
+    stage.addEventListener('pointerdown', function (e) {
+      stage.setPointerCapture(e.pointerId);
+      pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+      var ids = Object.keys(pointers);
+      if (ids.length === 1) {
+        gesture = { type: 'drag', startX: e.clientX, startY: e.clientY, baseX: pos.x, baseY: pos.y, moved: false };
+      } else if (ids.length === 2) {
+        var a = pointers[ids[0]], b = pointers[ids[1]];
+        gesture = { type: 'pinch', startDist: Math.hypot(a.x - b.x, a.y - b.y), baseScale: pos.scale };
+      }
+    });
+    stage.addEventListener('pointermove', function (e) {
+      if (!pointers[e.pointerId] || !gesture) return;
+      pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+      if (gesture.type === 'drag') {
+        var dx = e.clientX - gesture.startX, dy = e.clientY - gesture.startY;
+        if (Math.hypot(dx, dy) > 6) gesture.moved = true;
+        if (gesture.moved) { pos.x = gesture.baseX + dx; pos.y = gesture.baseY + dy; apply(); }
+      } else if (gesture.type === 'pinch') {
+        var ids = Object.keys(pointers);
+        if (ids.length < 2) return;
+        var a = pointers[ids[0]], b = pointers[ids[1]];
+        var dist = Math.hypot(a.x - b.x, a.y - b.y);
+        pos.scale = Math.min(3, Math.max(0.35, gesture.baseScale * (dist / gesture.startDist)));
+        apply();
+      }
+    });
+    function endPointer(e) {
+      var wasTap = gesture && gesture.type === 'drag' && !gesture.moved;
+      delete pointers[e.pointerId];
+      if (wasTap) {
+        var r = body.getBoundingClientRect();
+        var inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+        if (inside) squeezeAt(body, e.clientX, e.clientY);
+      }
+      if (Object.keys(pointers).length === 0) gesture = null;
+    }
+    stage.addEventListener('pointerup', endPointer);
+    stage.addEventListener('pointercancel', endPointer);
+  })();
 
   /* ------------------------------------------------------------------ */
   /* Product gallery thumbnails                                          */

@@ -5,7 +5,7 @@ so it can be reproduced on another store.
 
 ## 1. Product
 
-One product, handle `squishy`, 15 "Style" variants at £9.99 (compare-at £19.99), all bundle-eligible.
+One product, handle `squishy`, a single variant at £9.99 (compare-at £19.99). Media: the transparent butter cutout first, then the ten numbered PDP feature images (all on the `main` branch).
 Data in [`product.json`](product.json) (mirrors the Shopify `productSet` input) and
 [`products.csv`](products.csv) (Shopify admin CSV import).
 

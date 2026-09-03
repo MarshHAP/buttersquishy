@@ -2,7 +2,93 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {}
+      "blocks": {
+        "tile1": {
+          "type": "tile",
+          "settings": {
+            "icon": "sparkle",
+            "label": "Ultra-Realistic Butter Look"
+          }
+        },
+        "tile2": {
+          "type": "tile",
+          "settings": {
+            "icon": "hand",
+            "label": "Soft, Slow-Rebound Texture"
+          }
+        },
+        "tile3": {
+          "type": "tile",
+          "settings": {
+            "icon": "leaf",
+            "label": "Stress & Fidget Relief"
+          }
+        },
+        "faq1": {
+          "type": "faq",
+          "settings": {
+            "question": "How does the bundle pricing work?",
+            "answer": "<p>One Butter Squishy is £9.99. Choose “Buy Two” for £16.99 or “Buy Three” for £19.99 — the discount applies automatically at checkout, no code needed.</p>"
+          }
+        },
+        "faq2": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it real butter?",
+            "answer": "<p>Nope! It’s a soft, slow-rebound foam squishy that looks exactly like a 4 oz stick of salted butter. Leave it on the counter or in the fridge and watch people try to use it.</p>"
+          }
+        },
+        "faq3": {
+          "type": "faq",
+          "settings": {
+            "question": "What does it feel like?",
+            "answer": "<p>Soft and squishy with a slow rise — squeeze it, stretch it or poke it and it slowly returns to shape over a few seconds. Not stiff or rubbery like cheaper fidget toys.</p>"
+          }
+        },
+        "faq4": {
+          "type": "faq",
+          "settings": {
+            "question": "What age is it suitable for?",
+            "answer": "<p>Great for kids, teens and adults as a calming sensory tool. Ages 3+ with supervision. Non-toxic and phthalate-free.</p>"
+          }
+        },
+        "faq5": {
+          "type": "faq",
+          "settings": {
+            "question": "Will it lose its squish?",
+            "answer": "<p>Unlike slime it won’t dry out or make a mess. Squeeze it again and again without losing its shape. Keep it away from sharp objects and direct sunlight.</p>"
+          }
+        },
+        "faq6": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I don’t love it?",
+            "answer": "<p>Every order is covered by our 30-day money-back guarantee. If you’re not happy, we’ll refund you in full — no questions asked.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tile1",
+        "tile2",
+        "tile3",
+        "faq1",
+        "faq2",
+        "faq3",
+        "faq4",
+        "faq5",
+        "faq6"
+      ],
+      "settings": {
+        "tagline": "The prank that doubles as the most satisfying stress toy on your desk.",
+        "description_title": "Product Description",
+        "open_description": false,
+        "faq_title": "Frequently Asked Questions",
+        "shipping_title": "Shipping, Returns & Guarantees",
+        "shipping_text": "<p><strong>Shipping:</strong> orders are dispatched within 1 working day with tracked delivery. UK delivery is typically 2–4 working days.</p><p><strong>Returns:</strong> not happy? Return it within 30 days for a full refund — no questions asked.</p><p><strong>Guarantee:</strong> every Butter Squishy is covered by our 30-day money-back guarantee.</p>",
+        "show_squeeze": true,
+        "show_see": true,
+        "play_butter": 3
+      }
     },
     "icon_bar": {
       "type": "icon-bar",
@@ -32,7 +118,7 @@
           "settings": {
             "icon": "truck",
             "heading": "Trackable Shipping",
-            "text": "Follow your squishy all the way to your door."
+            "text": "Follow your butter all the way to your door."
           }
         },
         "item4": {
@@ -54,7 +140,7 @@
     "testimonials": {
       "type": "testimonials",
       "settings": {
-        "heading": "Loved by Squeezers Everywhere",
+        "heading": "Loved by Squeezers (and Pranksters)",
         "text": "Here's what our customers are saying."
       },
       "blocks": {
@@ -62,27 +148,27 @@
           "type": "testimonial",
           "settings": {
             "stars": 5,
-            "quote": "Keeps one on my desk for stressful calls. The slow rise is weirdly satisfying — best £10 I've spent this year.",
+            "quote": "Left it in the office fridge on Monday. By Wednesday three people had tried to butter their toast with it. Now it lives on my desk for stressful calls.",
             "author": "Sophie M.",
-            "detail": "Verified buyer — Butter Bear"
+            "detail": "Verified buyer — Buy Two"
           }
         },
         "t2": {
           "type": "testimonial",
           "settings": {
             "stars": 5,
-            "quote": "Bought the 3-for-£19.99 bundle for my kids' party bags. Weeks later they're still squishing them every day and not one has torn.",
+            "quote": "Bought three for stocking fillers. The slow rise is weirdly satisfying and they look SO real — my dad genuinely put one in the butter dish.",
             "author": "Daniel K.",
-            "detail": "Verified buyer — Lemon Cat, Mint Frog, Panda"
+            "detail": "Verified buyer — Buy Three"
           }
         },
         "t3": {
           "type": "testimonial",
           "settings": {
             "stars": 5,
-            "quote": "So much softer than the cheap ones from the market. My son takes his Blueberry Whale everywhere and it still springs back like new.",
+            "quote": "So much softer than the cheap fidget toys we’ve had. My son takes his to school in his pencil case and it still springs back like new.",
             "author": "Priya S.",
-            "detail": "Verified buyer — Blueberry Whale"
+            "detail": "Verified buyer — Buy One"
           }
         }
       },
@@ -91,38 +177,11 @@
         "t2",
         "t3"
       ]
-    },
-    "faq": {
-      "type": "faq",
-      "settings": {
-        "heading": "Frequently Asked Questions"
-      },
-      "blocks": {
-        "q1": {
-          "type": "question",
-          "settings": {
-            "question": "How does the bundle pricing work?",
-            "answer": "<p>One squishy is £9.99. Add any two to your basket and you pay £16.99; add any three and you pay just £19.99. Mix and match any styles — the discount applies automatically at checkout, no code needed.</p>"
-          }
-        },
-        "q2": {
-          "type": "question",
-          "settings": {
-            "question": "What is a slow-rise squishy?",
-            "answer": "<p>Squishies are made from ultra-soft polyurethane foam. Squeeze one and it slowly rises back to its original shape over about five seconds — the satisfying part that makes them so good for fidgeting and stress relief.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "q1",
-        "q2"
-      ]
     }
   },
   "order": [
     "main",
     "icon_bar",
-    "testimonials",
-    "faq"
+    "testimonials"
   ]
 }

@@ -1,16 +1,2 @@
-Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Variant SKU,Variant Price,Variant Compare At Price,Variant Inventory Policy,Variant Requires Shipping,Variant Taxable,Status
-squishy,Squishy™ — The Slow-Rise Stress Squeezie,"<p><strong>Meet your new favourite fidget.</strong> Squishy™ is the ultra-soft, slow-rise stress squeezie that sinks under your fingers and springs back over five deeply satisfying seconds. Keep one on your desk, in your pocket or in the pencil case for calm on demand.</p><ul><li>🧸 <strong>Slow-rise foam</strong> — squeeze, release, and watch it rise back over ~5 seconds</li><li>💪 <strong>Built to last</strong> — dense, high-rebound foam that survives thousands of squishes</li><li>🌿 <strong>Safe for everyone</strong> — non-toxic, phthalate-free and suitable for ages 3+</li><li>🎁 <strong>The perfect gift</strong> — for birthdays, party bags, stocking fillers and just-because days</li><li>✋ <strong>Palm-sized</strong> — roughly 8 cm, small enough to take anywhere</li></ul><p><em>Bundle &amp; save: any 2 Squishies for £16.99 or mix and match any 3 for just £19.99 — applied automatically at checkout!</em></p>",The Squishy Store,Stress Relief Toy,"squishy, bundle-eligible, stress-relief, fidget, slow-rise",TRUE,Style,Butter Bear,SQ-BUTTER-BEAR,9.99,19.99,continue,TRUE,TRUE,active
-squishy,,,,,,,Style,Lemon Cat,SQ-LEMON-CAT,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Cloud Bunny,SQ-CLOUD-BUNNY,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Peach Duck,SQ-PEACH-DUCK,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Mint Frog,SQ-MINT-FROG,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Cocoa Puppy,SQ-COCOA-PUPPY,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Blueberry Whale,SQ-BLUEBERRY-WHALE,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Strawberry Pig,SQ-STRAWBERRY-PIG,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Honey Bee,SQ-HONEY-BEE,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Avocado Buddy,SQ-AVOCADO,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Marshmallow Ghost,SQ-MARSHMALLOW-GHOST,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Boba Tea,SQ-BOBA-TEA,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Sunny Egg,SQ-SUNNY-EGG,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Dumpling,SQ-DUMPLING,9.99,19.99,continue,TRUE,TRUE,
-squishy,,,,,,,Style,Panda,SQ-PANDA,9.99,19.99,continue,TRUE,TRUE,
+Handle,Title,Vendor,Type,Tags,Published,Variant SKU,Variant Price,Variant Compare At Price,Variant Inventory Policy,Variant Requires Shipping,Variant Taxable,Status
+squishy,Butter Squishy™ — The Ultra-Realistic Butter Stress Squeezie,The Squishy Store,Stress Relief Toy,"butter-squishy, bundle-eligible, stress-relief, fidget, slow-rise, prank-gift",TRUE,SQ-BUTTER,9.99,19.99,continue,TRUE,TRUE,active

@@ -8,6 +8,16 @@
     "color_bg_soft": "#FFF8DC",
     "color_sale": "#E5462B",
     "bundle_tier2_price": 1699,
-    "bundle_tier3_price": 1999
+    "bundle_tier3_price": 1999,
+    "tier1_label": "Buy One",
+    "tier2_label": "Buy Two",
+    "tier3_label": "Buy Three",
+    "tier2_badge": "MOST POPULAR",
+    "tier3_badge": "BEST VALUE",
+    "default_tier": "2",
+    "ship_lead_days": 5,
+    "reviews_text": "Rated 4.9 ‘Excellent’",
+    "reviews_count": "800+ Reviews",
+    "guarantee_text": "30 Day Money Back Guarantee"
   }
 }

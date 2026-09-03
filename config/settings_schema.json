@@ -71,23 +71,100 @@
     ]
   },
   {
-    "name": "Bundle offer",
+    "name": "Buy box & bundle offer",
     "settings": [
       {
         "type": "paragraph",
-        "content": "Single price comes from the product. Enter tier prices in pence (e.g. 1699 = £16.99). Create matching automatic discounts in Shopify admin — see store-setup/README.md."
+        "content": "Single price comes from the product. Enter tier prices in pence (1699 = £16.99) and create the matching automatic discounts — see store-setup/README.md."
       },
       {
         "type": "number",
         "id": "bundle_tier2_price",
-        "label": "Price for any 2 (pence)",
+        "label": "Price for Buy Two (pence)",
         "default": 1699
       },
       {
         "type": "number",
         "id": "bundle_tier3_price",
-        "label": "Price for any 3 (pence)",
+        "label": "Price for Buy Three (pence)",
         "default": 1999
+      },
+      {
+        "type": "text",
+        "id": "tier1_label",
+        "label": "Tier 1 label",
+        "default": "Buy One"
+      },
+      {
+        "type": "text",
+        "id": "tier2_label",
+        "label": "Tier 2 label",
+        "default": "Buy Two"
+      },
+      {
+        "type": "text",
+        "id": "tier3_label",
+        "label": "Tier 3 label",
+        "default": "Buy Three"
+      },
+      {
+        "type": "text",
+        "id": "tier2_badge",
+        "label": "Tier 2 badge",
+        "default": "MOST POPULAR"
+      },
+      {
+        "type": "text",
+        "id": "tier3_badge",
+        "label": "Tier 3 badge",
+        "default": "BEST VALUE"
+      },
+      {
+        "type": "select",
+        "id": "default_tier",
+        "label": "Pre-selected tier",
+        "options": [
+          {
+            "value": "1",
+            "label": "Buy One"
+          },
+          {
+            "value": "2",
+            "label": "Buy Two"
+          },
+          {
+            "value": "3",
+            "label": "Buy Three"
+          }
+        ],
+        "default": "2"
+      },
+      {
+        "type": "range",
+        "id": "ship_lead_days",
+        "label": "Arrives-by lead time (days)",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "default": 5
+      },
+      {
+        "type": "text",
+        "id": "reviews_text",
+        "label": "Rating text",
+        "default": "Rated 4.9 ‘Excellent’"
+      },
+      {
+        "type": "text",
+        "id": "reviews_count",
+        "label": "Review count text",
+        "default": "800+ Reviews"
+      },
+      {
+        "type": "text",
+        "id": "guarantee_text",
+        "label": "Guarantee text",
+        "default": "30 Day Money Back Guarantee"
       }
     ]
   },

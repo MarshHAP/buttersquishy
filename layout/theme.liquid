@@ -67,5 +67,20 @@
     </main>
 
     {% section 'footer' %}
+
+    <div class="ar" data-ar aria-hidden="true">
+      <video class="ar__video" data-ar-video autoplay playsinline muted></video>
+      <div class="ar__stage" data-ar-stage>
+        <div class="ar__butter" data-ar-butter>
+          <div class="squeeze__body" data-squeeze-body>
+            <img data-ar-img src="{{ 'butter-03.png' | asset_url }}" alt="" width="560" height="540" draggable="false">
+            <div class="squeeze__dimples" data-dimples></div>
+          </div>
+        </div>
+      </div>
+      <div class="ar__msg" data-ar-msg></div>
+      <button type="button" class="ar__close" data-ar-close aria-label="Close camera">&times;</button>
+      <div class="ar__bar"><span>Drag to move · pinch to resize · tap to squeeze</span></div>
+    </div>
   </body>
 </html>

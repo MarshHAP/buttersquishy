@@ -12,9 +12,9 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "",
+        "eyebrow": "The original butter stress squeezie",
         "heading": "Squeeze the Stress Away",
-        "subheading": "Meet Squishy™ — the ultra-soft, slow-rise squeezie that melts in your hand and bounces right back, every single time.",
+        "subheading": "Meet the Butter Squishy™ — the ultra-realistic stick of butter that squishes, stretches and slowly rises back, every single time.",
         "button_label": "Shop Now",
         "button_link": "",
         "button2_label": "",
@@ -22,13 +22,45 @@
         "interval": 5
       }
     },
-    "featured_bundle": {
-      "type": "featured-bundle",
+    "featured_product": {
+      "type": "featured-product",
+      "blocks": {
+        "tile1": {
+          "type": "tile",
+          "settings": {
+            "icon": "sparkle",
+            "label": "Ultra-Realistic Butter Look"
+          }
+        },
+        "tile2": {
+          "type": "tile",
+          "settings": {
+            "icon": "hand",
+            "label": "Soft, Slow-Rebound Texture"
+          }
+        },
+        "tile3": {
+          "type": "tile",
+          "settings": {
+            "icon": "leaf",
+            "label": "Stress & Fidget Relief"
+          }
+        }
+      },
+      "block_order": [
+        "tile1",
+        "tile2",
+        "tile3"
+      ],
       "settings": {
         "product": "squishy",
-        "eyebrow": "Mix & match — 2 for £16.99 · 3 for £19.99",
-        "heading": "Build Your Squishy Bundle",
-        "text": "Fifteen adorable squishies to choose from. Grab any two for £16.99 or any three for £19.99 — the discount applies automatically at checkout."
+        "eyebrow": "1 for £9.99 · 2 for £16.99 · 3 for £19.99",
+        "heading": "Meet the Butter Squishy",
+        "text": "An ultra-realistic stick of butter that squishes, stretches and slowly rises back. Grab one for your desk — or three for the whole office.",
+        "tagline": "The prank that doubles as the most satisfying stress toy on your desk.",
+        "show_squeeze": true,
+        "show_see": true,
+        "play_butter": 3
       }
     },
     "parade": {
@@ -45,7 +77,7 @@
         "row1": {
           "type": "row",
           "settings": {
-            "feature": "Ultra-slow rise — a full 5-second squish",
+            "feature": "Ultra-realistic butter look",
             "us": true,
             "them": false
           }
@@ -53,7 +85,7 @@
         "row2": {
           "type": "row",
           "settings": {
-            "feature": "Bounces back to shape every time",
+            "feature": "Slow-rebound foam that returns to shape",
             "us": true,
             "them": false
           }
@@ -61,7 +93,7 @@
         "row3": {
           "type": "row",
           "settings": {
-            "feature": "Non-toxic, kid-safe foam",
+            "feature": "Non-toxic, kid-safe material",
             "us": true,
             "them": false
           }
@@ -69,7 +101,7 @@
         "row4": {
           "type": "row",
           "settings": {
-            "feature": "2 for £16.99 · 3 for £19.99 mix & match bundles",
+            "feature": "2 for £16.99 · 3 for £19.99 bundles",
             "us": true,
             "them": false
           }
@@ -85,7 +117,7 @@
         "row6": {
           "type": "row",
           "settings": {
-            "feature": "Tears or goes flat within a week",
+            "feature": "Stiff, rubbery or tears within a week",
             "us": false,
             "them": true
           }
@@ -100,7 +132,7 @@
         "row6"
       ],
       "settings": {
-        "heading": "Why The Squishy Store?",
+        "heading": "Why Butter Squishy?",
         "text": "Not all squishies are created equal.",
         "us_label": "The Squishy Store",
         "them_label": "Other squishies"
@@ -130,7 +162,7 @@
           "settings": {
             "icon": "truck",
             "heading": "Trackable Shipping",
-            "text": "Follow your squishy all the way to your door."
+            "text": "Follow your butter all the way to your door."
           }
         },
         "item4": {
@@ -160,27 +192,27 @@
           "type": "testimonial",
           "settings": {
             "stars": 5,
-            "quote": "Keeps one on my desk for stressful calls. The slow rise is weirdly satisfying — best £10 I've spent this year.",
+            "quote": "Left it in the office fridge on Monday. By Wednesday three people had tried to butter their toast with it. Now it lives on my desk for stressful calls.",
             "author": "Sophie M.",
-            "detail": "Verified buyer — Butter Bear"
+            "detail": "Verified buyer — Buy Two"
           }
         },
         "t2": {
           "type": "testimonial",
           "settings": {
             "stars": 5,
-            "quote": "Bought the 3-for-£19.99 bundle for my kids' party bags. Weeks later they're still squishing them every day and not one has torn.",
+            "quote": "Bought three for stocking fillers. The slow rise is weirdly satisfying and they look SO real — my dad genuinely put one in the butter dish.",
             "author": "Daniel K.",
-            "detail": "Verified buyer — Lemon Cat, Mint Frog, Panda"
+            "detail": "Verified buyer — Buy Three"
           }
         },
         "t3": {
           "type": "testimonial",
           "settings": {
             "stars": 5,
-            "quote": "So much softer than the cheap ones from the market. My son takes his Blueberry Whale everywhere and it still springs back like new.",
+            "quote": "So much softer than the cheap fidget toys we’ve had. My son takes his to school in his pencil case and it still springs back like new.",
             "author": "Priya S.",
-            "detail": "Verified buyer — Blueberry Whale"
+            "detail": "Verified buyer — Buy One"
           }
         }
       },
@@ -190,7 +222,7 @@
         "t3"
       ],
       "settings": {
-        "heading": "Loved by Squeezers Everywhere",
+        "heading": "Loved by Squeezers (and Pranksters)",
         "text": "Here's what our customers are saying.",
         "soft_bg": false
       }
@@ -202,35 +234,42 @@
           "type": "question",
           "settings": {
             "question": "How does the bundle pricing work?",
-            "answer": "<p>One squishy is £9.99. Add any two to your basket and you pay £16.99; add any three and you pay just £19.99. Mix and match any styles — the discount applies automatically at checkout, no code needed.</p>"
+            "answer": "<p>One Butter Squishy is £9.99. Choose “Buy Two” for £16.99 or “Buy Three” for £19.99 — the discount applies automatically at checkout, no code needed.</p>"
           }
         },
         "q2": {
           "type": "question",
           "settings": {
-            "question": "What is a slow-rise squishy?",
-            "answer": "<p>Squishies are made from ultra-soft polyurethane foam. Squeeze one and it slowly rises back to its original shape over about five seconds — the satisfying part that makes them so good for fidgeting and stress relief.</p>"
+            "question": "Is it real butter?",
+            "answer": "<p>Nope! It’s a soft, slow-rebound foam squishy that looks exactly like a 4 oz stick of salted butter. Leave it on the counter or in the fridge and watch people try to use it.</p>"
           }
         },
         "q3": {
           "type": "question",
           "settings": {
-            "question": "What age are they suitable for?",
-            "answer": "<p>Our squishies are designed for ages 3 and up, and are just as popular with grown-ups at their desks. They're non-toxic and phthalate-free.</p>"
+            "question": "What does it feel like?",
+            "answer": "<p>Soft and squishy with a slow rise — squeeze it, stretch it or poke it and it slowly returns to shape over a few seconds. Not stiff or rubbery like cheaper fidget toys.</p>"
           }
         },
         "q4": {
           "type": "question",
           "settings": {
-            "question": "Will it lose its squish?",
-            "answer": "<p>Made from dense, high-rebound foam — far thicker than novelty squishies — yours stays soft and springy through thousands of squeezes. Keep it away from sharp objects and direct sunlight for best results.</p>"
+            "question": "What age is it suitable for?",
+            "answer": "<p>Great for kids, teens and adults as a calming sensory tool. Ages 3+ with supervision. Non-toxic and phthalate-free.</p>"
           }
         },
         "q5": {
           "type": "question",
           "settings": {
-            "question": "What if I don't love it?",
-            "answer": "<p>Every order is covered by our 30-day money-back guarantee. If you're not happy, we'll refund you in full — no questions asked.</p>"
+            "question": "Will it lose its squish?",
+            "answer": "<p>Unlike slime it won’t dry out or make a mess. Squeeze it again and again without losing its shape. Keep it away from sharp objects and direct sunlight.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "What if I don’t love it?",
+            "answer": "<p>Every order is covered by our 30-day money-back guarantee. If you’re not happy, we’ll refund you in full — no questions asked.</p>"
           }
         }
       },
@@ -239,7 +278,8 @@
         "q2",
         "q3",
         "q4",
-        "q5"
+        "q5",
+        "q6"
       ],
       "settings": {
         "heading": "Frequently Asked Questions"
@@ -249,14 +289,14 @@
       "type": "contact-form",
       "settings": {
         "heading": "Get in Touch",
-        "text": "Questions about your order or your new squishy? We reply within 24 hours."
+        "text": "Questions about your order or your new butter? We reply within 24 hours."
       }
     }
   },
   "order": [
     "flying_butter",
     "hero",
-    "featured_bundle",
+    "featured_product",
     "parade",
     "comparison",
     "icon_bar",

@@ -3,7 +3,7 @@
 {%- if section.settings.source == 'product' and product != blank and product.variants.size > 0 -%}{%- assign use_product = true -%}{%- endif -%}
 
 <div class="parade" aria-hidden="true">
-  <a class="parade__link" href="{% if product != blank %}{{ product.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}#bundle" tabindex="-1">
+  <a class="parade__link" href="{% if product != blank %}{{ product.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}#buy" tabindex="-1">
     <div class="parade__track" style="--parade-duration: {{ section.settings.speed }}s;">
       {%- for copy in (1..2) -%}
         <div class="parade__group">

@@ -1,0 +1,74 @@
+{%- comment -%}
+  Simple tiered buy box for a single-variant product:
+  Buy One / Buy Two / Buy Three radio tiers, ship-by date, one Add To Cart.
+  Tier prices come from theme settings (bundle_tier2_price / bundle_tier3_price, pence);
+  the matching automatic discounts apply them at checkout.
+  Accepts: product, tagline (optional), heading_tag ('h1' on the product page, 'h2' elsewhere)
+{%- endcomment -%}
+
+{%- assign variant = product.selected_or_first_available_variant | default: product.variants.first -%}
+{%- assign unit = variant.price -%}
+{%- assign compare = variant.compare_at_price | default: unit -%}
+{%- assign tier2 = settings.bundle_tier2_price | default: unit | times: 2 -%}
+{%- assign tier3 = settings.bundle_tier3_price | default: unit | times: 3 -%}
+{%- assign compare2 = compare | times: 2 -%}
+{%- assign compare3 = compare | times: 3 -%}
+{%- assign default_tier = settings.default_tier | default: '2' -%}
+{%- assign lead_secs = settings.ship_lead_days | default: 5 | times: 86400 -%}
+{%- assign now_secs = 'now' | date: '%s' | plus: 0 -%}
+{%- assign arrives = now_secs | plus: lead_secs | date: '%B %-d' -%}
+{%- assign tag = heading_tag | default: 'h2' -%}
+
+<div class="buy-box" id="buy" data-buy-box data-variant-id="{{ variant.id }}" data-unit-price="{{ unit }}" data-tier2-price="{{ tier2 }}" data-tier3-price="{{ tier3 }}" data-compare-price="{{ compare }}">
+  <div class="buy-box__rating">
+    <span class="buy-box__stars" aria-hidden="true">★★★★★</span>
+    <span>{{ settings.reviews_text | default: "Rated 4.9 ‘Excellent’" }}</span>
+    <span class="buy-box__divider" aria-hidden="true">|</span>
+    <a href="#reviews">{{ settings.reviews_count | default: '800+ Reviews' }}</a>
+  </div>
+
+  <{{ tag }} class="buy-box__title">{{ product.title }}</{{ tag }}>
+  {%- if tagline != blank -%}<p class="buy-box__tagline">{{ tagline }}</p>{%- endif -%}
+
+  <div class="buy-box__tiers" role="radiogroup" aria-label="Choose a bundle">
+    {%- for n in (1..3) -%}
+      {%- case n -%}
+        {%- when 1 -%}
+          {%- assign label = settings.tier1_label | default: 'Buy One' -%}{%- assign price = unit -%}{%- assign was = compare -%}{%- assign badge = '' -%}
+        {%- when 2 -%}
+          {%- assign label = settings.tier2_label | default: 'Buy Two' -%}{%- assign price = tier2 -%}{%- assign was = compare2 -%}{%- assign badge = settings.tier2_badge -%}
+        {%- when 3 -%}
+          {%- assign label = settings.tier3_label | default: 'Buy Three' -%}{%- assign price = tier3 -%}{%- assign was = compare3 -%}{%- assign badge = settings.tier3_badge -%}
+      {%- endcase -%}
+      {%- assign n_str = n | append: '' -%}
+      <label class="tier {% if n_str == default_tier %}is-selected{% endif %}" data-tier>
+        <input type="radio" name="tier" value="{{ n }}" data-price="{{ price }}" data-compare="{{ was }}" {% if n_str == default_tier %}checked{% endif %}>
+        <span class="tier__radio" aria-hidden="true"></span>
+        <span class="tier__icons" aria-hidden="true">
+          {%- for i in (1..n) -%}{% render 'butter-image', index: 3, width: 60, class: 'tier__icon' %}{%- endfor -%}
+        </span>
+        <span class="tier__label">{{ label }}</span>
+        <span class="tier__price">{{ price | money }}{% if was > price %} <s>{{ was | money }}</s>{% endif %}</span>
+        {%- if badge != blank -%}<span class="tier__badge {% if n == 3 %}tier__badge--alt{% endif %}">{{ badge }}</span>{%- endif -%}
+      </label>
+    {%- endfor -%}
+  </div>
+
+  <p class="buy-box__ship">{% render 'icon', name: 'bolt' %} Ready to ship — arrives by <strong>{{ arrives }}</strong></p>
+
+  <button type="button" class="btn btn--full btn--large buy-box__add" data-buy-add {% unless variant.available %}disabled{% endunless %}>
+    {%- if variant.available -%}
+      Add To Cart — <span data-buy-price>{{ unit | money }}</span> <s data-buy-compare>{{ compare | money }}</s>
+    {%- else -%}
+      Sold out
+    {%- endif -%}
+  </button>
+  <p class="buy-box__error" data-buy-error role="alert"></p>
+
+  <p class="buy-box__guarantee">{% render 'icon', name: 'shield' %} {{ settings.guarantee_text | default: '30 Day Money Back Guarantee' }}</p>
+  <div class="payment-icons payment-icons--light" aria-label="Accepted payment methods">
+    {%- for type in shop.enabled_payment_types -%}
+      {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+    {%- endfor -%}
+  </div>
+</div>

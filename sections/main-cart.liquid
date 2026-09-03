@@ -3,8 +3,8 @@
     {%- if cart.item_count == 0 -%}
       <div class="cart-empty">
         <h1>Your basket is empty</h1>
-        <p>Your new squishy is waiting for you.</p>
-        <a href="{{ all_products['squishy'].url | default: routes.all_products_collection_url }}" class="btn btn--large">Shop Squishies</a>
+        <p>Your new butter is waiting for you.</p>
+        <a href="{{ all_products['squishy'].url | default: routes.all_products_collection_url }}" class="btn btn--large">Shop Butter Squishy</a>
       </div>
     {%- else -%}
       <h1>Your basket</h1>
@@ -20,11 +20,11 @@
       {%- assign shop_url = all_products['squishy'].url | default: routes.all_products_collection_url -%}
       {%- if sq_qty == 1 -%}
         <div class="form-status" style="background:rgba(var(--color-butter),0.35);color:rgb(var(--color-ink));">
-          🧸 Add 1 more squishy for <strong>any 2 for {{ tier2 | money }}</strong>, or 2 more for <strong>any 3 for {{ tier3 | money }}</strong> — <a href="{{ shop_url }}#bundle" style="color:inherit;">complete your bundle</a>.
+          🧸 Add 1 more Butter Squishy for <strong>any 2 for {{ tier2 | money }}</strong>, or 2 more for <strong>any 3 for {{ tier3 | money }}</strong> — <a href="{{ shop_url }}#buy" style="color:inherit;">complete your bundle</a>.
         </div>
       {%- elsif sq_qty == 2 -%}
         <div class="form-status" style="background:rgba(var(--color-butter),0.35);color:rgb(var(--color-ink));">
-          🎉 2-for-{{ tier2 | money }} applied at checkout. Add 1 more for <strong>any 3 for {{ tier3 | money }}</strong> — <a href="{{ shop_url }}#bundle" style="color:inherit;">complete your bundle</a>.
+          🎉 2-for-{{ tier2 | money }} applied at checkout. Add 1 more for <strong>any 3 for {{ tier3 | money }}</strong> — <a href="{{ shop_url }}#buy" style="color:inherit;">complete your bundle</a>.
         </div>
       {%- elsif sq_qty >= 3 -%}
         <div class="form-status form-status--success">🎉 Bundle complete — your discount is applied automatically at checkout.</div>
@@ -48,7 +48,7 @@
                       {%- if item.image -%}
                         <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" width="72" height="72">
                       {%- else -%}
-                        {% render 'squishy-emoji', title: item.variant.title %}
+                        {% render 'butter-image', index: 1, width: 160 %}
                       {%- endif -%}
                     </div>
                     <div>

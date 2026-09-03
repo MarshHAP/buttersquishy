@@ -1,19 +1,53 @@
-<div class="section">
+{%- capture tiles -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'tile' -%}
+      <div class="tile" {{ block.shopify_attributes }}>
+        <span class="tile__icon">{% render 'icon', name: block.settings.icon %}</span>
+        <span class="tile__label">{{ block.settings.label }}</span>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+<div class="section section--product">
   <div class="page-width">
     <div class="product-grid">
-      <div>
-        {% render 'product-gallery', product: product %}
+      <div class="product-grid__media">
+        {% render 'product-gallery', product: product, tiles: tiles %}
+
+        <div class="accordion">
+          <details {% if section.settings.open_description %}open{% endif %}>
+            <summary>{{ section.settings.description_title | default: 'Product Description' }}</summary>
+            <div class="accordion__body rte">{{ product.description }}</div>
+          </details>
+          {%- assign faq_count = section.blocks | where: 'type', 'faq' | size -%}
+          {%- if faq_count > 0 -%}
+            <details>
+              <summary>{{ section.settings.faq_title | default: 'Frequently Asked Questions' }}</summary>
+              <div class="accordion__body">
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'faq' -%}
+                    <div class="accordion__qa" {{ block.shopify_attributes }}>
+                      <strong>{{ block.settings.question }}</strong>
+                      <div class="rte">{{ block.settings.answer }}</div>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </details>
+          {%- endif -%}
+          {%- if section.settings.shipping_text != blank -%}
+            <details>
+              <summary>{{ section.settings.shipping_title | default: 'Shipping, Returns & Guarantees' }}</summary>
+              <div class="accordion__body rte">{{ section.settings.shipping_text }}</div>
+            </details>
+          {%- endif -%}
+        </div>
       </div>
 
-      <div class="product-info">
-        <h1>{{ product.title }}</h1>
-        <div class="product-info__stars">★★★★★ <span>4.9 — 2,000+ happy squeezers</span></div>
-
-        {% render 'bundle-buy-box', product: product %}
-
-        <div class="product-description">
-          {{ product.description }}
-        </div>
+      <div class="product-grid__buy">
+        {% render 'buy-box', product: product, tagline: section.settings.tagline, heading_tag: 'h1' %}
+        {% render 'squeeze-me', show_squeeze: section.settings.show_squeeze, show_see: section.settings.show_see, butter: section.settings.play_butter %}
       </div>
     </div>
   </div>
@@ -27,11 +61,11 @@
     "url": {{ request.origin | append: product.url | json }},
     "description": {{ product.description | strip_html | json }},
     "brand": { "@type": "Brand", "name": {{ product.vendor | json }} },
+    {%- if product.featured_image -%}"image": {{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }},{%- endif -%}
     "offers": {
-      "@type": "AggregateOffer",
+      "@type": "Offer",
       "priceCurrency": {{ cart.currency.iso_code | json }},
-      "lowPrice": {{ product.price_min | divided_by: 100.0 | json }},
-      "highPrice": {{ product.price_max | divided_by: 100.0 | json }},
+      "price": {{ product.price | divided_by: 100.0 | json }},
       "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
     }
   }
@@ -40,6 +74,56 @@
 {% schema %}
 {
   "name": "Product",
-  "settings": []
+  "settings": [
+    { "type": "header", "content": "Squeeze Me / See Me" },
+    { "type": "checkbox", "id": "show_squeeze", "label": "Show “Squeeze Me” panel", "default": true },
+    { "type": "checkbox", "id": "show_see", "label": "Show “See Me” camera panel", "default": true },
+    { "type": "range", "id": "play_butter", "label": "Which butter cutout (1–10)", "min": 1, "max": 10, "step": 1, "default": 3 },
+    { "type": "text", "id": "tagline", "label": "Tagline (under the title)", "default": "The prank that doubles as the most satisfying stress toy on your desk." },
+    { "type": "header", "content": "Accordions" },
+    { "type": "text", "id": "description_title", "label": "Description title", "default": "Product Description" },
+    { "type": "checkbox", "id": "open_description", "label": "Open description by default", "default": false },
+    { "type": "text", "id": "faq_title", "label": "FAQ title", "default": "Frequently Asked Questions" },
+    { "type": "text", "id": "shipping_title", "label": "Shipping title", "default": "Shipping, Returns & Guarantees" },
+    {
+      "type": "richtext",
+      "id": "shipping_text",
+      "label": "Shipping, returns & guarantees",
+      "default": "<p><strong>Shipping:</strong> orders are dispatched within 1 working day with tracked delivery. UK delivery is typically 2–4 working days.</p><p><strong>Returns:</strong> not happy? Return it within 30 days for a full refund — no questions asked.</p><p><strong>Guarantee:</strong> every Butter Squishy is covered by our 30-day money-back guarantee.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Feature tile",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "hand", "label": "Hand" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "bolt", "label": "Bolt" }
+          ],
+          "default": "sparkle"
+        },
+        { "type": "text", "id": "label", "label": "Label", "default": "Ultra-Realistic Butter Look" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How does the bundle pricing work?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>One Butter Squishy is £9.99. Pick “Buy Two” for £16.99 or “Buy Three” for £19.99 — the discount applies automatically at checkout.</p>" }
+      ]
+    }
+  ]
 }
 {% endschema %}
