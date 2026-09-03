@@ -75,13 +75,13 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Single price comes from the product. Enter tier prices in pence (1699 = £16.99) and create the matching automatic discounts — see store-setup/README.md."
+        "content": "Single price comes from the product. Enter tier prices in pence (1299 = £12.99) and create the matching automatic discounts — see store-setup/README.md."
       },
       {
         "type": "number",
         "id": "bundle_tier2_price",
         "label": "Price for Buy Two (pence)",
-        "default": 1699
+        "default": 1299
       },
       {
         "type": "number",

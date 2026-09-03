@@ -2,6 +2,7 @@
   <div class="page-width">
     <div class="site-footer__grid">
       <div class="site-footer__brand">
+        <img src="{{ 'logo.png' | asset_url }}" alt="" width="480" height="480" class="site-footer__badge" loading="lazy">
         <h3>{{ settings.brand_name | default: shop.name }}</h3>
         <p>{{ section.settings.blurb }}</p>
         <div class="payment-icons" aria-label="Accepted payment methods">

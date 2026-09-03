@@ -9,8 +9,9 @@
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- else -%}
-      <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="%23FFD447"/><text x="32" y="45" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial Black, sans-serif" font-weight="900" font-size="36" fill="%232547C4">S</text></svg>'>
+      <link rel="icon" type="image/png" sizes="64x64" href="{{ 'favicon.png' | asset_url }}">
     {%- endif -%}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'apple-touch-icon.png' | asset_url }}">
 
     <title>
       {{ page_title }}

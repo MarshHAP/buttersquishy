@@ -18,7 +18,7 @@ It mirrors the section-for-section structure of the Balloon Friends store, rebra
 | Quantity | Price | Per item |
 | --- | --- | --- |
 | 1 | £9.99 | £9.99 |
-| Any 2 | £16.99 | £8.50 |
+| Any 2 | £12.99 | £6.50 |
 | Any 3 | £19.99 | £6.66 |
 
 The single price lives on the product. The 2-tier and 3-tier prices are theme settings
@@ -30,7 +30,8 @@ the single variant; checkout applies the discount.
 ## Files
 
 ```
-assets/       base.css, theme.js, butter-01.png … butter-10.png (transparent cutouts)
+assets/       base.css, theme.js, logo.png, favicon.png, apple-touch-icon.png,
+              butter-01.png … butter-10.png (transparent cutouts)
 config/       settings_schema.json, settings_data.json
 layout/       theme.liquid, password.liquid
 locales/      en.default.json
@@ -63,5 +64,6 @@ fingers.
 ## Placeholder images
 
 Every image slot degrades gracefully: a product without photos shows the butter cutout, and the hero falls back to a butter-yellow gradient with floating
-squishies. The hero banner, scrolling parade and flying background use the ten butter cutouts in `assets/`. Upload photos in the theme editor (hero slides, logo, favicon) and on the product
+squishies. The hero banner, scrolling parade and flying background use the ten butter cutouts in `assets/`. The round "The Squishy Store" badge in `assets/logo.png` is the header logo, footer badge and favicon unless
+you pick different images under Theme settings › Branding. Upload photos in the theme editor (hero slides) and on the product
 (one image per variant) to replace them.

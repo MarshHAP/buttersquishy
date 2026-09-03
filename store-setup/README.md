@@ -16,17 +16,18 @@ combine with other product discounts. Shopify then applies whichever gives the b
 
 | Title | Customer buys | Customer gets | Result |
 | --- | --- | --- | --- |
-| `2 FOR £16.99 — Mix & Match Squishies` | 1 × squishy | 1 × squishy at **29.93 %** off | 9.99 + 7.00 = £16.99 |
+| `2 FOR £12.99 — Mix & Match Squishies` | 1 × squishy | 1 × squishy at **69.97 %** off | 9.99 + 3.00 = £12.99 |
 | `ANY 3 FOR £19.99 — Mix & Match Squishies` | 2 × squishy | 1 × squishy at **99.9 %** off | 9.99 + 9.99 + 0.01 = £19.99 |
 
-Resulting basket totals: 1 → £9.99, 2 → £16.99, 3 → £19.99, 4 → £29.98, 5 → £39.97, 6 → £39.98.
-(The "any 3" discount wins over the pair discount whenever three or more are in the basket.)
+Resulting basket totals: 1 → £9.99, 2 → £12.99, 3 → £19.99, 4 → £25.98, 5 → £35.97, 6 → £38.97.
+(Shopify applies whichever single automatic discount saves more: "any 3" wins at exactly three, the pair
+discount wins at four or more.)
 
 ## 3. Theme settings
 
 Online Store → Themes → Customize → Theme settings → **Bundle offer**:
 
-- Price for any 2 (pence): `1699`
+- Price for any 2 (pence): `1299`
 - Price for any 3 (pence): `1999`
 
 ## 4. Navigation
@@ -37,5 +38,5 @@ Main menu: Home `/` · Shop `/products/squishy` · FAQ `/#faq` · Contact `/#con
 ## 5. Images to upload (optional, theme works without them)
 
 - Hero background slides ×4 (lifestyle photos) — Home › Hero section
-- Logo + favicon — Theme settings › Branding
+- Logo + favicon — already shipped in the theme assets (`assets/logo.png`, `assets/favicon.png`); override under Theme settings › Branding if needed
 - One square photo per variant — Products › Squishy › variant images

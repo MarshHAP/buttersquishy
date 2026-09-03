@@ -22,7 +22,7 @@
       {%- if settings.logo != blank -%}
         <img src="{{ settings.logo | image_url: width: 600 }}" alt="{{ settings.brand_name | default: shop.name }}" width="278" height="44">
       {%- else -%}
-        {% render 'brand-wordmark' %}
+        <img src="{{ 'logo.png' | asset_url }}" alt="{{ settings.brand_name | default: shop.name }}" width="480" height="480" class="site-header__badge">
       {%- endif -%}
     </a>
 

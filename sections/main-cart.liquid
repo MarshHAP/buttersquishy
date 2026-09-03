@@ -15,7 +15,7 @@
           {%- assign sq_qty = sq_qty | plus: item.quantity -%}
         {%- endif -%}
       {%- endfor -%}
-      {%- assign tier2 = settings.bundle_tier2_price | default: 1699 -%}
+      {%- assign tier2 = settings.bundle_tier2_price | default: 1299 -%}
       {%- assign tier3 = settings.bundle_tier3_price | default: 1999 -%}
       {%- assign shop_url = all_products['squishy'].url | default: routes.all_products_collection_url -%}
       {%- if sq_qty == 1 -%}
