@@ -28,7 +28,7 @@ full group of three is in the basket.)
 Online Store → Themes → Customize → Theme settings → **Bundle offer**:
 
 - Price for any 2 (pence): `1299`
-- Price for any 3 (pence): `1999`
+- Price for any 3 (pence): `1499`
 
 ## 4. Navigation
 
