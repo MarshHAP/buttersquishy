@@ -43,7 +43,7 @@ img { max-width: 100%; height: auto; }
 }
 
 .section { padding: 5.6rem 0; }
-.section--soft { background: rgba(var(--color-bg-soft), 0.88); }
+.section--soft { background: rgb(var(--color-bg-soft)); }
 .section__heading { text-align: center; max-width: 68rem; margin: 0 auto 3.6rem; }
 .section__heading p { color: rgba(var(--color-ink), 0.72); }
 
@@ -266,10 +266,12 @@ img { max-width: 100%; height: auto; }
 }
 
 /* Flying butter squishies — fixed layer behind the page content */
+/* Sits inside #MainContent's stacking context at z-index -1, so it paints behind every
+   section and image but above the page's white background. */
 .flying-butter {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   overflow: hidden;
   pointer-events: none;
   opacity: var(--fb-opacity, 0.55);
@@ -304,7 +306,7 @@ img { max-width: 100%; height: auto; }
 }
 
 /* Page content sits above the flying layer */
-#MainContent { position: relative; z-index: 1; }
+#MainContent { position: relative; z-index: 1; isolation: isolate; }
 .site-footer { position: relative; z-index: 1; }
 
 /* Trust strip under hero */
@@ -312,7 +314,7 @@ img { max-width: 100%; height: auto; }
 
 /* Squish parade banner */
 .parade {
-  background: rgba(var(--color-butter), 0.85);
+  background: rgb(var(--color-butter));
   overflow: hidden;
   padding: 2.4rem 0;
   border-top: 0.1rem solid rgba(var(--color-ink), 0.06);
