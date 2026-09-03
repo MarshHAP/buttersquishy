@@ -87,7 +87,7 @@
         "type": "number",
         "id": "bundle_tier3_price",
         "label": "Price for Buy Three (pence)",
-        "default": 1999
+        "default": 1499
       },
       {
         "type": "text",

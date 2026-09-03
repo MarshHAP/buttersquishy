@@ -17,11 +17,11 @@ combine with other product discounts. Shopify then applies whichever gives the b
 | Title | Customer buys | Customer gets | Result |
 | --- | --- | --- | --- |
 | `2 FOR £12.99 — Mix & Match Squishies` | 1 × squishy | 1 × squishy at **69.97 %** off | 9.99 + 3.00 = £12.99 |
-| `ANY 3 FOR £19.99 — Mix & Match Squishies` | 2 × squishy | 1 × squishy at **99.9 %** off | 9.99 + 9.99 + 0.01 = £19.99 |
+| `ANY 3 FOR £14.99 — Mix & Match Squishies` | 1 × squishy | 2 × squishy at **74.98 %** off | 9.99 + 2.50 + 2.50 = £14.99 |
 
-Resulting basket totals: 1 → £9.99, 2 → £12.99, 3 → £19.99, 4 → £25.98, 5 → £35.97, 6 → £38.97.
-(Shopify applies whichever single automatic discount saves more: "any 3" wins at exactly three, the pair
-discount wins at four or more.)
+Resulting basket totals: 1 → £9.99, 2 → £12.99, 3 → £14.99, 4 → £24.98, 5 → £34.97, 6 → £29.98.
+(Shopify applies whichever single automatic discount saves more, so the three-pack deal wins whenever a
+full group of three is in the basket.)
 
 ## 3. Theme settings
 

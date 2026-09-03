@@ -54,7 +54,7 @@
       ],
       "settings": {
         "product": "squishy",
-        "eyebrow": "1 for £9.99 · 2 for £12.99 · 3 for £19.99",
+        "eyebrow": "1 for £9.99 · 2 for £12.99 · 3 for £14.99",
         "heading": "Meet the Butter Squishy",
         "text": "An ultra-realistic stick of butter that squishes, stretches and slowly rises back. Grab one for your desk — or three for the whole office.",
         "tagline": "The prank that doubles as the most satisfying stress toy on your desk.",
@@ -100,7 +100,7 @@
         "row4": {
           "type": "row",
           "settings": {
-            "feature": "2 for £12.99 · 3 for £19.99 bundles",
+            "feature": "2 for £12.99 · 3 for £14.99 bundles",
             "us": true,
             "them": false
           }
@@ -233,7 +233,7 @@
           "type": "question",
           "settings": {
             "question": "How does the bundle pricing work?",
-            "answer": "<p>One Butter Squishy is £9.99. Choose “Buy Two” for £12.99 or “Buy Three” for £19.99 — the discount applies automatically at checkout, no code needed.</p>"
+            "answer": "<p>One Butter Squishy is £9.99. Choose “Buy Two” for £12.99 or “Buy Three” for £14.99 — the discount applies automatically at checkout, no code needed.</p>"
           }
         },
         "q2": {

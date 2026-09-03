@@ -19,7 +19,7 @@ It mirrors the section-for-section structure of the Balloon Friends store, rebra
 | --- | --- | --- |
 | 1 | £9.99 | £9.99 |
 | Any 2 | £12.99 | £6.50 |
-| Any 3 | £19.99 | £6.66 |
+| Any 3 | £14.99 | £5.00 |
 
 The single price lives on the product. The 2-tier and 3-tier prices are theme settings
 (`bundle_tier2_price`, `bundle_tier3_price`, in pence) and must match the two automatic discounts
