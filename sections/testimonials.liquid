@@ -1,0 +1,52 @@
+<div class="section {% if section.settings.soft_bg %}section--soft{% endif %}">
+  <div class="page-width">
+    <div class="section__heading animate-in">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.text }}</p>
+    </div>
+    <div class="testimonials">
+      {%- for block in section.blocks -%}
+        <div class="testimonial animate-in" {{ block.shopify_attributes }}>
+          <div class="testimonial__stars" aria-label="{{ block.settings.stars }} out of 5 stars">
+            {%- for i in (1..block.settings.stars) -%}★{%- endfor -%}
+          </div>
+          <p class="testimonial__text">“{{ block.settings.quote }}”</p>
+          <p class="testimonial__author">{{ block.settings.author }} <span>{{ block.settings.detail }}</span></p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Loved by Squeezers Everywhere" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Here's what our customers are saying." },
+    { "type": "checkbox", "id": "soft_bg", "label": "Soft background", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "Keeps one on my desk for stressful calls. The slow rise is weirdly satisfying — best £10 I've spent this year." },
+        { "type": "text", "id": "author", "label": "Author", "default": "Sophie M." },
+        { "type": "text", "id": "detail", "label": "Detail", "default": "Verified buyer — Butter Bear" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial", "settings": { "stars": 5, "quote": "Keeps one on my desk for stressful calls. The slow rise is weirdly satisfying — best £10 I've spent this year.", "author": "Sophie M.", "detail": "Verified buyer — Butter Bear" } },
+        { "type": "testimonial", "settings": { "stars": 5, "quote": "Bought the 3-for-£19.99 bundle for my kids' party bags. Weeks later they're still squishing them every day and not one has torn.", "author": "Daniel K.", "detail": "Verified buyer — Lemon Cat, Mint Frog, Panda" } },
+        { "type": "testimonial", "settings": { "stars": 5, "quote": "So much softer than the cheap ones from the market. My son takes his Blueberry Whale everywhere and it still springs back like new.", "author": "Priya S.", "detail": "Verified buyer — Blueberry Whale" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

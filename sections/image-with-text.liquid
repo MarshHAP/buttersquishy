@@ -1,0 +1,48 @@
+<div class="section {% if section.settings.soft_bg %}section--soft{% endif %}">
+  <div class="page-width">
+    <div class="image-with-text {% if section.settings.reverse %}image-with-text--reverse{% endif %}">
+      <div class="image-with-text__media animate-in">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            srcset="{{ section.settings.image | image_url: width: 400 }} 400w, {{ section.settings.image | image_url: width: 800 }} 800w, {{ section.settings.image | image_url: width: 1200 }} 1200w"
+            sizes="(max-width: 749px) 100vw, 50vw"
+            alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}" loading="lazy" width="1200" height="900">
+        {%- else -%}
+          <span aria-hidden="true">{{ section.settings.placeholder_emoji }}</span>
+        {%- endif -%}
+      </div>
+      <div class="image-with-text__content animate-in">
+        {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+        <div>{{ section.settings.text }}</div>
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '/products/squishy' }}" class="btn">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "placeholder_emoji", "label": "Placeholder emoji (until image uploaded)", "default": "🧸" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Calm in the Palm of Your Hand" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Squishy™ is made from ultra-soft, slow-rise foam that sinks under your fingers and springs back over five satisfying seconds. Small enough for a pocket or pencil case, tough enough for a thousand squeezes.</p>"
+    },
+    { "type": "text", "id": "button_label", "label": "Button label" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "checkbox", "id": "reverse", "label": "Image on right", "default": false },
+    { "type": "checkbox", "id": "soft_bg", "label": "Soft background", "default": false }
+  ],
+  "presets": [{ "name": "Image with text" }]
+}
+{% endschema %}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_accent }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="%23FFD447"/><text x="32" y="45" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial Black, sans-serif" font-weight="900" font-size="36" fill="%232547C4">S</text></svg>'>
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- assign brand = settings.brand_name | default: shop.name -%}
+      {%- unless page_title contains brand %} &ndash; {{ brand }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    <meta property="og:site_name" content="{{ settings.brand_name | default: shop.name }}">
+    <meta property="og:title" content="{{ page_title | escape }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ canonical_url }}">
+    {% if page_description %}<meta property="og:description" content="{{ page_description | escape }}">{% endif %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    {% style %}
+      :root {
+        --color-ink: {{ settings.color_ink.red }}, {{ settings.color_ink.green }}, {{ settings.color_ink.blue }};
+        --color-accent: {{ settings.color_accent.red }}, {{ settings.color_accent.green }}, {{ settings.color_accent.blue }};
+        --color-butter: {{ settings.color_butter.red }}, {{ settings.color_butter.green }}, {{ settings.color_butter.blue }};
+        --color-bg: {{ settings.color_bg.red }}, {{ settings.color_bg.green }}, {{ settings.color_bg.blue }};
+        --color-bg-soft: {{ settings.color_bg_soft.red }}, {{ settings.color_bg_soft.green }}, {{ settings.color_bg_soft.blue }};
+        --color-sale: {{ settings.color_sale.red }}, {{ settings.color_sale.green }}, {{ settings.color_sale.blue }};
+      }
+    {% endstyle %}
+
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script>
+      window.SQ = {
+        moneyFormat: {{ shop.money_format | json }},
+        cartUrl: {{ routes.cart_url | json }}
+      };
+    </script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    <a class="skip-link" href="#MainContent">Skip to content</a>
+
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
+
+    <main id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+  </body>
+</html>

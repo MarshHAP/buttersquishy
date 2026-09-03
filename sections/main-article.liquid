@@ -1,0 +1,17 @@
+<div class="section">
+  <div class="page-width page-content">
+    <h1>{{ article.title }}</h1>
+    <p style="color:rgba(var(--color-ink),0.6);font-size:1.35rem;">{{ article.published_at | date: '%d %B %Y' }}</p>
+    {%- if article.image -%}
+      <img src="{{ article.image | image_url: width: 1400 }}" alt="{{ article.title | escape }}" style="border-radius:2rem;margin-bottom:2.4rem;" width="1400" height="800">
+    {%- endif -%}
+    <div>{{ article.content }}</div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": []
+}
+{% endschema %}

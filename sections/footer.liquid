@@ -1,0 +1,91 @@
+<footer class="site-footer">
+  <div class="page-width">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <h3>{{ settings.brand_name | default: shop.name }}</h3>
+        <p>{{ section.settings.blurb }}</p>
+        <div class="payment-icons" aria-label="Accepted payment methods">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="site-footer__links">
+        <h3>Quick links</h3>
+        <ul>
+          {%- assign menu = section.settings.menu -%}
+          {%- if menu != blank and linklists[menu].links.size > 0 -%}
+            {%- for link in linklists[menu].links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          {%- else -%}
+            <li><a href="{{ routes.root_url }}">Home</a></li>
+            <li><a href="{{ all_products['squishy'].url | default: routes.all_products_collection_url }}">Shop</a></li>
+            <li><a href="{{ routes.root_url }}#faq">FAQ</a></li>
+            <li><a href="{{ routes.root_url }}#contact">Contact</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+      <div class="site-footer__newsletter">
+        <h3>{{ section.settings.newsletter_heading }}</h3>
+        <p style="font-size:1.4rem;">{{ section.settings.newsletter_text }}</p>
+        {%- form 'customer', class: 'newsletter' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p style="font-size:1.4rem;color:#8ee6a5;">🧸 Thanks for subscribing!</p>
+          {%- else -%}
+            <div class="newsletter-form">
+              <input type="email" name="contact[email]" placeholder="Your email" required aria-label="Email address">
+              <button type="submit" class="btn">Join</button>
+            </div>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <p style="font-size:1.3rem;color:#ff9d9d;">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ settings.brand_name | default: shop.name }}. All rights reserved.</span>
+      <span>
+        {%- if settings.social_instagram != blank %}<a href="{{ settings.social_instagram }}" target="_blank" rel="noopener">Instagram</a>&nbsp;&nbsp;{% endif -%}
+        {%- if settings.social_tiktok != blank %}<a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener">TikTok</a>&nbsp;&nbsp;{% endif -%}
+        {%- if settings.social_facebook != blank %}<a href="{{ settings.social_facebook }}" target="_blank" rel="noopener">Facebook</a>{% endif -%}
+      </span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "blurb",
+      "label": "About blurb",
+      "default": "Ultra-soft, slow-rise squishies that turn stressful moments into satisfying ones. Designed for busy hands and big feelings."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Quick links menu"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Join the squish squad"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "Sign up for special offers, new squishies and giveaways."
+    }
+  ]
+}
+{% endschema %}

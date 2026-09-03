@@ -1,0 +1,46 @@
+<div class="section" id="faq">
+  <div class="page-width">
+    <div class="section__heading animate-in">
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="faq animate-in">
+      {%- for block in section.blocks -%}
+        <details {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question }}</summary>
+          <div class="faq__answer">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How does the bundle pricing work?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>One squishy is £9.99. Add any two to your basket and you pay £16.99; add any three and you pay just £19.99. Mix and match any styles — the discount applies automatically at checkout, no code needed.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "How does the bundle pricing work?", "answer": "<p>One squishy is £9.99. Add any two to your basket and you pay £16.99; add any three and you pay just £19.99. Mix and match any styles — the discount applies automatically at checkout, no code needed.</p>" } },
+        { "type": "question", "settings": { "question": "What is a slow-rise squishy?", "answer": "<p>Squishies are made from ultra-soft polyurethane foam. Squeeze one and it slowly rises back to its original shape over about five seconds — the satisfying part that makes them so good for fidgeting and stress relief.</p>" } },
+        { "type": "question", "settings": { "question": "What age are they suitable for?", "answer": "<p>Our squishies are designed for ages 3 and up, and are just as popular with grown-ups at their desks. They're non-toxic and phthalate-free.</p>" } },
+        { "type": "question", "settings": { "question": "Will it lose its squish?", "answer": "<p>Made from dense, high-rebound foam — far thicker than novelty squishies — yours stays soft and springy through thousands of squeezes. Keep it away from sharp objects and direct sunlight for best results.</p>" } },
+        { "type": "question", "settings": { "question": "What if I don't love it?", "answer": "<p>Every order is covered by our 30-day money-back guarantee. If you're not happy, we'll refund you in full — no questions asked.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

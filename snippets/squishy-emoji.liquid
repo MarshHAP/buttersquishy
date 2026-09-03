@@ -1,0 +1,25 @@
+{%- comment -%}
+  Maps a variant title to a placeholder emoji, used wherever a variant has
+  no image yet (bundle tiles, parade, cart thumbnails).
+  Accepts: title (string)
+{%- endcomment -%}
+{%- assign emoji = '🧸' -%}
+{%- if title contains 'Bear' -%}{%- assign emoji = '🧸' -%}
+{%- elsif title contains 'Cat' or title contains 'Kitty' -%}{%- assign emoji = '🐱' -%}
+{%- elsif title contains 'Bunny' or title contains 'Rabbit' -%}{%- assign emoji = '🐰' -%}
+{%- elsif title contains 'Duck' -%}{%- assign emoji = '🦆' -%}
+{%- elsif title contains 'Frog' -%}{%- assign emoji = '🐸' -%}
+{%- elsif title contains 'Puppy' or title contains 'Dog' -%}{%- assign emoji = '🐶' -%}
+{%- elsif title contains 'Whale' -%}{%- assign emoji = '🐳' -%}
+{%- elsif title contains 'Pig' -%}{%- assign emoji = '🐷' -%}
+{%- elsif title contains 'Bee' -%}{%- assign emoji = '🐝' -%}
+{%- elsif title contains 'Avocado' -%}{%- assign emoji = '🥑' -%}
+{%- elsif title contains 'Ghost' -%}{%- assign emoji = '👻' -%}
+{%- elsif title contains 'Boba' -%}{%- assign emoji = '🧋' -%}
+{%- elsif title contains 'Egg' -%}{%- assign emoji = '🍳' -%}
+{%- elsif title contains 'Dumpling' -%}{%- assign emoji = '🥟' -%}
+{%- elsif title contains 'Panda' -%}{%- assign emoji = '🐼' -%}
+{%- elsif title contains 'Dino' -%}{%- assign emoji = '🦕' -%}
+{%- elsif title contains 'Unicorn' -%}{%- assign emoji = '🦄' -%}
+{%- endif -%}
+{{- emoji -}}

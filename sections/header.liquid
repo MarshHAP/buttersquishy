@@ -1,0 +1,55 @@
+<header class="site-header">
+  <div class="page-width site-header__inner">
+    <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
+    <nav class="site-header__nav" data-site-nav aria-label="Main navigation">
+      {%- assign menu = section.settings.menu -%}
+      {%- if menu != blank and linklists[menu].links.size > 0 -%}
+        {%- for link in linklists[menu].links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="{{ all_products['squishy'].url | default: routes.all_products_collection_url }}">Shop</a>
+        <a href="{{ routes.root_url }}#faq">FAQ</a>
+        <a href="{{ routes.root_url }}#contact">Contact</a>
+      {%- endif -%}
+    </nav>
+
+    <a class="site-header__logo" href="{{ routes.root_url }}" aria-label="{{ settings.brand_name | default: shop.name }} — home">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 600 }}" alt="{{ settings.brand_name | default: shop.name }}" width="278" height="44">
+      {%- else -%}
+        {% render 'brand-wordmark' %}
+      {%- endif -%}
+    </a>
+
+    <div class="site-header__actions">
+      <a class="site-header__cart" href="{{ routes.cart_url }}" aria-label="Basket">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1.5 13.5a1 1 0 0 1-1 1.1H5.5a1 1 0 0 1-1-1.1L6 7z"/><path d="M9 10V5a3 3 0 0 1 6 0v5"/></svg>
+        <span class="cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "The Squishy Store"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    }
+  ]
+}
+{% endschema %}

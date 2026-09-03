@@ -1,0 +1,256 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Squeeze the Stress Away",
+        "subheading": "Meet Squishy™ — the ultra-soft, slow-rise squeezie that melts in your hand and bounces right back, every single time.",
+        "button_label": "Shop Now",
+        "button_link": "",
+        "button2_label": "",
+        "button2_link": "",
+        "interval": 5
+      }
+    },
+    "featured_bundle": {
+      "type": "featured-bundle",
+      "settings": {
+        "product": "squishy",
+        "eyebrow": "Mix & match — 2 for £16.99 · 3 for £19.99",
+        "heading": "Build Your Squishy Bundle",
+        "text": "Fifteen adorable squishies to choose from. Grab any two for £16.99 or any three for £19.99 — the discount applies automatically at checkout."
+      }
+    },
+    "parade": {
+      "type": "squish-parade",
+      "settings": {
+        "product": "squishy",
+        "speed": 45
+      }
+    },
+    "comparison": {
+      "type": "comparison-table",
+      "blocks": {
+        "row1": {
+          "type": "row",
+          "settings": {
+            "feature": "Ultra-slow rise — a full 5-second squish",
+            "us": true,
+            "them": false
+          }
+        },
+        "row2": {
+          "type": "row",
+          "settings": {
+            "feature": "Bounces back to shape every time",
+            "us": true,
+            "them": false
+          }
+        },
+        "row3": {
+          "type": "row",
+          "settings": {
+            "feature": "Non-toxic, kid-safe foam",
+            "us": true,
+            "them": false
+          }
+        },
+        "row4": {
+          "type": "row",
+          "settings": {
+            "feature": "2 for £16.99 · 3 for £19.99 mix & match bundles",
+            "us": true,
+            "them": false
+          }
+        },
+        "row5": {
+          "type": "row",
+          "settings": {
+            "feature": "30-day money-back guarantee",
+            "us": true,
+            "them": false
+          }
+        },
+        "row6": {
+          "type": "row",
+          "settings": {
+            "feature": "Tears or goes flat within a week",
+            "us": false,
+            "them": true
+          }
+        }
+      },
+      "block_order": [
+        "row1",
+        "row2",
+        "row3",
+        "row4",
+        "row5",
+        "row6"
+      ],
+      "settings": {
+        "heading": "Why The Squishy Store?",
+        "text": "Not all squishies are created equal.",
+        "us_label": "The Squishy Store",
+        "them_label": "Other squishies"
+      }
+    },
+    "icon_bar": {
+      "type": "icon-bar",
+      "blocks": {
+        "item1": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "heading": "30-Day Guarantee",
+            "text": "Not squishy enough? Full refund, no questions asked."
+          }
+        },
+        "item2": {
+          "type": "item",
+          "settings": {
+            "icon": "chat",
+            "heading": "24/7 Customer Care",
+            "text": "Real humans, ready to help any time."
+          }
+        },
+        "item3": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "heading": "Trackable Shipping",
+            "text": "Follow your squishy all the way to your door."
+          }
+        },
+        "item4": {
+          "type": "item",
+          "settings": {
+            "icon": "heart",
+            "heading": "Safe, Non-Toxic Foam",
+            "text": "Soft, durable and made for ages 3+."
+          }
+        }
+      },
+      "block_order": [
+        "item1",
+        "item2",
+        "item3",
+        "item4"
+      ],
+      "settings": {
+        "heading": "Shop With Total Peace of Mind",
+        "soft_bg": true
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "quote": "Keeps one on my desk for stressful calls. The slow rise is weirdly satisfying — best £10 I've spent this year.",
+            "author": "Sophie M.",
+            "detail": "Verified buyer — Butter Bear"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "quote": "Bought the 3-for-£19.99 bundle for my kids' party bags. Weeks later they're still squishing them every day and not one has torn.",
+            "author": "Daniel K.",
+            "detail": "Verified buyer — Lemon Cat, Mint Frog, Panda"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "quote": "So much softer than the cheap ones from the market. My son takes his Blueberry Whale everywhere and it still springs back like new.",
+            "author": "Priya S.",
+            "detail": "Verified buyer — Blueberry Whale"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "heading": "Loved by Squeezers Everywhere",
+        "text": "Here's what our customers are saying.",
+        "soft_bg": false
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "How does the bundle pricing work?",
+            "answer": "<p>One squishy is £9.99. Add any two to your basket and you pay £16.99; add any three and you pay just £19.99. Mix and match any styles — the discount applies automatically at checkout, no code needed.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "What is a slow-rise squishy?",
+            "answer": "<p>Squishies are made from ultra-soft polyurethane foam. Squeeze one and it slowly rises back to its original shape over about five seconds — the satisfying part that makes them so good for fidgeting and stress relief.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "What age are they suitable for?",
+            "answer": "<p>Our squishies are designed for ages 3 and up, and are just as popular with grown-ups at their desks. They're non-toxic and phthalate-free.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Will it lose its squish?",
+            "answer": "<p>Made from dense, high-rebound foam — far thicker than novelty squishies — yours stays soft and springy through thousands of squeezes. Keep it away from sharp objects and direct sunlight for best results.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "What if I don't love it?",
+            "answer": "<p>Every order is covered by our 30-day money-back guarantee. If you're not happy, we'll refund you in full — no questions asked.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      }
+    },
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Get in Touch",
+        "text": "Questions about your order or your new squishy? We reply within 24 hours."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured_bundle",
+    "parade",
+    "comparison",
+    "icon_bar",
+    "testimonials",
+    "faq",
+    "contact"
+  ]
+}

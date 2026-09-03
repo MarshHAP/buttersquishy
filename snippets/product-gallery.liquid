@@ -1,0 +1,26 @@
+{%- comment -%}
+  Square product gallery: main viewer + scrollable thumbnail strip.
+  Accepts: product. Tapping bundle tiles swaps the main image via theme.js.
+{%- endcomment -%}
+<div class="product-gallery">
+  <div class="product-gallery__main" data-gallery-main>
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 800 }}"
+        srcset="{{ product.featured_image | image_url: width: 400 }} 400w, {{ product.featured_image | image_url: width: 800 }} 800w, {{ product.featured_image | image_url: width: 1200 }} 1200w, {{ product.featured_image | image_url: width: 1600 }} 1600w"
+        sizes="(max-width: 989px) 100vw, 55vw"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="eager" fetchpriority="high" width="1400" height="1400">
+    {%- else -%}
+      <span aria-hidden="true">🧸</span>
+    {%- endif -%}
+  </div>
+  {%- if product.images.size > 1 -%}
+    <div class="product-gallery__thumbs" data-gallery-thumbs>
+      {%- for image in product.images -%}
+        <button type="button" class="product-gallery__thumb {% if forloop.first %}is-active{% endif %}" data-gallery-thumb data-full="{{ image | image_url: width: 1400 }}" aria-label="View image {{ forloop.index }}">
+          <img src="{{ image | image_url: width: 180 }}" alt="{{ image.alt | default: product.title | escape }}" loading="lazy" width="90" height="90">
+        </button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>

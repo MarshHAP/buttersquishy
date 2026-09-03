@@ -1,0 +1,128 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "icon_bar": {
+      "type": "icon-bar",
+      "settings": {
+        "heading": "Shop With Total Peace of Mind",
+        "soft_bg": true
+      },
+      "blocks": {
+        "item1": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "heading": "30-Day Guarantee",
+            "text": "Not squishy enough? Full refund, no questions asked."
+          }
+        },
+        "item2": {
+          "type": "item",
+          "settings": {
+            "icon": "chat",
+            "heading": "24/7 Customer Care",
+            "text": "Real humans, ready to help any time."
+          }
+        },
+        "item3": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "heading": "Trackable Shipping",
+            "text": "Follow your squishy all the way to your door."
+          }
+        },
+        "item4": {
+          "type": "item",
+          "settings": {
+            "icon": "heart",
+            "heading": "Safe, Non-Toxic Foam",
+            "text": "Soft, durable and made for ages 3+."
+          }
+        }
+      },
+      "block_order": [
+        "item1",
+        "item2",
+        "item3",
+        "item4"
+      ]
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "Loved by Squeezers Everywhere",
+        "text": "Here's what our customers are saying."
+      },
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "quote": "Keeps one on my desk for stressful calls. The slow rise is weirdly satisfying — best £10 I've spent this year.",
+            "author": "Sophie M.",
+            "detail": "Verified buyer — Butter Bear"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "quote": "Bought the 3-for-£19.99 bundle for my kids' party bags. Weeks later they're still squishing them every day and not one has torn.",
+            "author": "Daniel K.",
+            "detail": "Verified buyer — Lemon Cat, Mint Frog, Panda"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "quote": "So much softer than the cheap ones from the market. My son takes his Blueberry Whale everywhere and it still springs back like new.",
+            "author": "Priya S.",
+            "detail": "Verified buyer — Blueberry Whale"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "How does the bundle pricing work?",
+            "answer": "<p>One squishy is £9.99. Add any two to your basket and you pay £16.99; add any three and you pay just £19.99. Mix and match any styles — the discount applies automatically at checkout, no code needed.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "What is a slow-rise squishy?",
+            "answer": "<p>Squishies are made from ultra-soft polyurethane foam. Squeeze one and it slowly rises back to its original shape over about five seconds — the satisfying part that makes them so good for fidgeting and stress relief.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "icon_bar",
+    "testimonials",
+    "faq"
+  ]
+}

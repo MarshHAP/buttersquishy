@@ -1,0 +1,45 @@
+<div class="section">
+  <div class="page-width">
+    <div class="product-grid">
+      <div>
+        {% render 'product-gallery', product: product %}
+      </div>
+
+      <div class="product-info">
+        <h1>{{ product.title }}</h1>
+        <div class="product-info__stars">★★★★★ <span>4.9 — 2,000+ happy squeezers</span></div>
+
+        {% render 'bundle-buy-box', product: product %}
+
+        <div class="product-description">
+          {{ product.description }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    "description": {{ product.description | strip_html | json }},
+    "brand": { "@type": "Brand", "name": {{ product.vendor | json }} },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "lowPrice": {{ product.price_min | divided_by: 100.0 | json }},
+      "highPrice": {{ product.price_max | divided_by: 100.0 | json }},
+      "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

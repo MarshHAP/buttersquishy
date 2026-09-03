@@ -1,0 +1,114 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "The Squishy Store",
+    "theme_version": "1.0.0",
+    "theme_author": "The Squishy Store",
+    "theme_documentation_url": "https://github.com/MarshHAP/buttersquishy",
+    "theme_support_url": "https://github.com/MarshHAP/buttersquishy"
+  },
+  {
+    "name": "Branding",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand name",
+        "default": "The Squishy Store",
+        "info": "Shown in the header, footer, and page titles."
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Text / ink",
+        "default": "#1C2B6E"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent",
+        "default": "#2547C4"
+      },
+      {
+        "type": "color",
+        "id": "color_butter",
+        "label": "Butter / highlight",
+        "default": "#FFD447"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_soft",
+        "label": "Soft background",
+        "default": "#FFF8DC"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Sale / savings",
+        "default": "#E5462B"
+      }
+    ]
+  },
+  {
+    "name": "Bundle offer",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Single price comes from the product. Enter tier prices in pence (e.g. 1699 = £16.99). Create matching automatic discounts in Shopify admin — see store-setup/README.md."
+      },
+      {
+        "type": "number",
+        "id": "bundle_tier2_price",
+        "label": "Price for any 2 (pence)",
+        "default": 1699
+      },
+      {
+        "type": "number",
+        "id": "bundle_tier3_price",
+        "label": "Price for any 3 (pence)",
+        "default": 1999
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      }
+    ]
+  }
+]

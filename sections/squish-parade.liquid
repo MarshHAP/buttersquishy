@@ -1,0 +1,42 @@
+{%- assign product = all_products[section.settings.product] -%}
+
+<div class="parade" aria-hidden="true">
+  {%- if product != blank and product.variants.size > 0 -%}
+    <a class="parade__link" href="{{ product.url }}#bundle" tabindex="-1">
+      <div class="parade__track" style="--parade-duration: {{ section.settings.speed }}s;">
+        {%- for copy in (1..2) -%}
+          <div class="parade__group">
+            {%- for variant in product.variants -%}
+              <span class="parade__pet">
+                {%- if variant.featured_image -%}
+                  <img src="{{ variant.featured_image | image_url: width: 300 }}" alt="" loading="lazy" width="150" height="150">
+                {%- else -%}
+                  <span>{% render 'squishy-emoji', title: variant.title %}</span>
+                {%- endif -%}
+              </span>
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </a>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Squish parade",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Scroll duration (seconds per loop)",
+      "min": 20,
+      "max": 90,
+      "step": 5,
+      "default": 45
+    }
+  ],
+  "presets": [{ "name": "Squish parade" }]
+}
+{% endschema %}

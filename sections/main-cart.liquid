@@ -1,0 +1,111 @@
+<div class="section">
+  <div class="page-width">
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-empty">
+        <h1>Your basket is empty</h1>
+        <p>Your new squishy is waiting for you.</p>
+        <a href="{{ all_products['squishy'].url | default: routes.all_products_collection_url }}" class="btn btn--large">Shop Squishies</a>
+      </div>
+    {%- else -%}
+      <h1>Your basket</h1>
+
+      {%- assign sq_qty = 0 -%}
+      {%- for item in cart.items -%}
+        {%- if item.product.handle == 'squishy' -%}
+          {%- assign sq_qty = sq_qty | plus: item.quantity -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign tier2 = settings.bundle_tier2_price | default: 1699 -%}
+      {%- assign tier3 = settings.bundle_tier3_price | default: 1999 -%}
+      {%- assign shop_url = all_products['squishy'].url | default: routes.all_products_collection_url -%}
+      {%- if sq_qty == 1 -%}
+        <div class="form-status" style="background:rgba(var(--color-butter),0.35);color:rgb(var(--color-ink));">
+          🧸 Add 1 more squishy for <strong>any 2 for {{ tier2 | money }}</strong>, or 2 more for <strong>any 3 for {{ tier3 | money }}</strong> — <a href="{{ shop_url }}#bundle" style="color:inherit;">complete your bundle</a>.
+        </div>
+      {%- elsif sq_qty == 2 -%}
+        <div class="form-status" style="background:rgba(var(--color-butter),0.35);color:rgb(var(--color-ink));">
+          🎉 2-for-{{ tier2 | money }} applied at checkout. Add 1 more for <strong>any 3 for {{ tier3 | money }}</strong> — <a href="{{ shop_url }}#bundle" style="color:inherit;">complete your bundle</a>.
+        </div>
+      {%- elsif sq_qty >= 3 -%}
+        <div class="form-status form-status--success">🎉 Bundle complete — your discount is applied automatically at checkout.</div>
+      {%- endif -%}
+
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th style="text-align:right;">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for item in cart.items -%}
+              <tr>
+                <td>
+                  <div class="cart-item__row">
+                    <div class="cart-item__img">
+                      {%- if item.image -%}
+                        <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.title | escape }}" width="72" height="72">
+                      {%- else -%}
+                        {% render 'squishy-emoji', title: item.variant.title %}
+                      {%- endif -%}
+                    </div>
+                    <div>
+                      <a class="cart-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                      {%- unless item.product.has_only_default_variant -%}
+                        <div class="cart-item__variant">{{ item.variant.title }}</div>
+                      {%- endunless -%}
+                      <a class="cart-item__remove" href="{{ item.url_to_remove }}">Remove</a>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="qty-input" data-cart-qty data-line="{{ forloop.index }}">
+                    <button type="button" data-dir="down" aria-label="Decrease quantity">&minus;</button>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity">
+                    <button type="button" data-dir="up" aria-label="Increase quantity">+</button>
+                  </div>
+                </td>
+                <td style="text-align:right;">
+                  {%- if item.original_line_price != item.final_line_price -%}
+                    <s style="color:rgba(var(--color-ink),0.45);">{{ item.original_line_price | money }}</s>
+                    <strong style="color:rgb(var(--color-sale));">{{ item.final_line_price | money }}</strong>
+                  {%- else -%}
+                    {{ item.final_line_price | money }}
+                  {%- endif -%}
+                </td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        <div class="cart-footer">
+          <div class="cart-summary">
+            {%- if cart.cart_level_discount_applications.size > 0 -%}
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <div class="cart-summary__row" style="color:rgb(var(--color-sale));">
+                  <span>{{ discount.title }}</span>
+                  <span>-{{ discount.total_allocated_amount | money }}</span>
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+            <div class="cart-summary__row">
+              <strong>Subtotal</strong>
+              <strong>{{ cart.total_price | money }}</strong>
+            </div>
+            <p class="cart-summary__note">Taxes included. Shipping calculated at checkout.</p>
+            <button type="submit" name="checkout" class="btn btn--full btn--large">Checkout — {{ cart.total_price | money }}</button>
+          </div>
+        </div>
+      </form>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

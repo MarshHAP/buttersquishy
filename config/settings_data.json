@@ -1,0 +1,13 @@
+{
+  "current": {
+    "brand_name": "The Squishy Store",
+    "color_ink": "#1C2B6E",
+    "color_accent": "#2547C4",
+    "color_butter": "#FFD447",
+    "color_bg": "#FFFFFF",
+    "color_bg_soft": "#FFF8DC",
+    "color_sale": "#E5462B",
+    "bundle_tier2_price": 1699,
+    "bundle_tier3_price": 1999
+  }
+}

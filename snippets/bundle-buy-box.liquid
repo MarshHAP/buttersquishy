@@ -1,0 +1,81 @@
+{%- comment -%}
+  Bundle buy box — tap-to-build bundle selector with tiered pricing:
+  1 for the unit price, any 2 for tier2, any 3 for tier3.
+  Accepts: product (product object)
+  Pricing is applied at checkout by the store's automatic discounts (see
+  store-setup/README.md); this UI mirrors that maths so shoppers see the
+  saving before checkout.
+{%- endcomment -%}
+
+{%- assign unit_price = product.selected_or_first_available_variant.price | default: product.price -%}
+{%- assign was_price = product.selected_or_first_available_variant.compare_at_price -%}
+{%- assign tier2_default = unit_price | times: 2 -%}
+{%- assign tier3_default = unit_price | times: 3 -%}
+{%- assign tier2 = settings.bundle_tier2_price | default: tier2_default -%}
+{%- assign tier3 = settings.bundle_tier3_price | default: tier3_default -%}
+{%- assign saving = tier3_default | minus: tier3 -%}
+
+<div class="bundle-box" id="bundle" data-bundle data-unit-price="{{ unit_price }}" data-tier2-price="{{ tier2 }}" data-tier3-price="{{ tier3 }}">
+  <div class="bundle-box__offer">
+    <span class="bundle-box__price">
+      {%- if was_price > unit_price -%}
+        <s class="bundle-box__was">{{ was_price | money }}</s>
+      {%- endif -%}
+      {{ unit_price | money }} each
+      {%- if was_price > unit_price -%}
+        {%- assign pct_off = was_price | minus: unit_price | times: 100.0 | divided_by: was_price | round -%}
+        <span class="bundle-box__save-badge">SAVE {{ pct_off }}%</span>
+      {%- endif -%}
+    </span>
+    <span class="bundle-box__badge">2 FOR {{ tier2 | money }}</span>
+    <span class="bundle-box__badge">ANY 3 FOR {{ tier3 | money }}</span>
+  </div>
+  <p class="bundle-box__hint">
+    Tap your favourite squishies to build a bundle — any 2 for {{ tier2 | money }}, or any 3 for {{ tier3 | money }} and <strong>save {{ saving | money }}</strong>. The discount is applied automatically at checkout.
+  </p>
+
+  <div class="bundle-grid" role="group" aria-label="Choose your squishies">
+    {%- for variant in product.variants -%}
+      {%- capture emoji -%}{% render 'squishy-emoji', title: variant.title %}{%- endcapture -%}
+      <button
+        type="button"
+        class="bundle-tile"
+        data-variant-id="{{ variant.id }}"
+        data-variant-name="{{ variant.title | escape }}"
+        data-variant-emoji="{{ emoji }}"
+        {% if variant.featured_image %}data-variant-image="{{ variant.featured_image | image_url: width: 200 }}" data-variant-image-full="{{ variant.featured_image | image_url: width: 1400 }}"{% endif %}
+        {% unless variant.available %}disabled title="Sold out"{% endunless %}
+      >
+        <span class="bundle-tile__minus" role="button" aria-label="Remove one {{ variant.title | escape }}">&minus;</span>
+        <span class="bundle-tile__qty">0</span>
+        <span class="bundle-tile__media">
+          {%- if variant.featured_image -%}
+            <img src="{{ variant.featured_image | image_url: width: 200 }}" alt="{{ variant.title | escape }}" loading="lazy" width="100" height="100">
+          {%- else -%}
+            {{ emoji }}
+          {%- endif -%}
+        </span>
+        <span class="bundle-tile__name">{{ variant.title }}</span>
+      </button>
+    {%- endfor -%}
+  </div>
+
+  <div class="bundle-progress">
+    <div class="bundle-progress__label">
+      <span data-bundle-count>Your bundle · 0 of 3</span>
+      <span class="bundle-progress__saving" data-bundle-saving hidden></span>
+    </div>
+    <div class="bundle-progress__slots" data-bundle-slots></div>
+  </div>
+
+  <div class="bundle-total" data-bundle-total></div>
+
+  <button type="button" class="btn btn--full btn--large" data-bundle-add disabled>Tap a squishy to start your bundle</button>
+  <p class="bundle-box__error" data-bundle-error role="alert"></p>
+
+  <p class="bundle-box__reassure">
+    <span>🛡 30-day guarantee</span>
+    <span>🚚 Tracked shipping</span>
+    <span>🔒 Secure checkout</span>
+  </p>
+</div>
