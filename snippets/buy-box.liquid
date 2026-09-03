@@ -9,8 +9,10 @@
 {%- assign variant = product.selected_or_first_available_variant | default: product.variants.first -%}
 {%- assign unit = variant.price -%}
 {%- assign compare = variant.compare_at_price | default: unit -%}
-{%- assign tier2 = settings.bundle_tier2_price | default: unit | times: 2 -%}
-{%- assign tier3 = settings.bundle_tier3_price | default: unit | times: 3 -%}
+{%- assign tier2_default = unit | times: 2 -%}
+{%- assign tier3_default = unit | times: 3 -%}
+{%- assign tier2 = settings.bundle_tier2_price | default: tier2_default -%}
+{%- assign tier3 = settings.bundle_tier3_price | default: tier3_default -%}
 {%- assign compare2 = compare | times: 2 -%}
 {%- assign compare3 = compare | times: 3 -%}
 {%- assign default_tier = settings.default_tier | default: '2' -%}
