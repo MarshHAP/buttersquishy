@@ -43,7 +43,7 @@ img { max-width: 100%; height: auto; }
 }
 
 .section { padding: 5.6rem 0; }
-.section--soft { background: rgb(var(--color-bg-soft)); }
+.section--soft { background: rgba(var(--color-bg-soft), 0.88); }
 .section__heading { text-align: center; max-width: 68rem; margin: 0 auto 3.6rem; }
 .section__heading p { color: rgba(var(--color-ink), 0.72); }
 
@@ -236,23 +236,71 @@ img { max-width: 100%; height: auto; }
 .hero__overlay { position: absolute; inset: 0; background: rgba(var(--color-ink), 0.45); }
 .hero__blob {
   position: absolute;
-  font-size: 5.6rem;
-  opacity: 0.9;
+  display: block;
+  opacity: 0.92;
   animation: squish 4s ease-in-out infinite;
   transform-origin: 50% 100%;
   z-index: 1;
   user-select: none;
   pointer-events: none;
+  filter: drop-shadow(0 0.6rem 1.2rem rgba(28, 43, 110, 0.18));
+  --blob-tilt: -10deg;
 }
+.hero__blob svg { width: 100%; height: auto; display: block; }
 @keyframes squish {
-  0%, 100% { transform: scale(1, 1) translateY(0); }
-  30% { transform: scale(1.12, 0.86) translateY(0.6rem); }
-  55% { transform: scale(0.94, 1.08) translateY(-1.2rem); }
-  75% { transform: scale(1.04, 0.96) translateY(0); }
+  0%, 100% { transform: rotate(var(--blob-tilt)) scale(1, 1) translateY(0); }
+  30% { transform: rotate(var(--blob-tilt)) scale(1.12, 0.86) translateY(0.6rem); }
+  55% { transform: rotate(var(--blob-tilt)) scale(0.94, 1.08) translateY(-1.2rem); }
+  75% { transform: rotate(var(--blob-tilt)) scale(1.04, 0.96) translateY(0); }
+}
+@media (max-width: 749px) {
+  .hero__blob { width: 8rem !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero__blob { animation: none; }
 }
+
+/* Flying butter squishies — fixed layer behind the page content */
+.flying-butter {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: var(--fb-opacity, 0.55);
+}
+.flying-butter__item {
+  position: absolute;
+  bottom: -20vh;
+  display: block;
+  will-change: transform;
+  animation-name: butter-fly;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  filter: drop-shadow(0 0.8rem 1.6rem rgba(28, 43, 110, 0.12));
+}
+.flying-butter__item--reverse { animation-name: butter-fly-reverse; }
+.flying-butter__item svg { width: 100%; height: auto; display: block; }
+@keyframes butter-fly {
+  0%   { transform: translate3d(0, 0, 0) rotate(var(--fb-tilt, 0deg)); }
+  50%  { transform: translate3d(6vw, -60vh, 0) rotate(calc(var(--fb-tilt, 0deg) + 180deg)); }
+  100% { transform: translate3d(-4vw, -125vh, 0) rotate(calc(var(--fb-tilt, 0deg) + 360deg)); }
+}
+@keyframes butter-fly-reverse {
+  0%   { transform: translate3d(0, 0, 0) rotate(var(--fb-tilt, 0deg)); }
+  50%  { transform: translate3d(-6vw, -60vh, 0) rotate(calc(var(--fb-tilt, 0deg) - 180deg)); }
+  100% { transform: translate3d(4vw, -125vh, 0) rotate(calc(var(--fb-tilt, 0deg) - 360deg)); }
+}
+@media (max-width: 749px) {
+  .flying-butter__item { max-width: 22vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flying-butter__item { animation: none; bottom: auto; top: var(--fb-top, 50%); transform: rotate(var(--fb-tilt, 0deg)); opacity: 0.6; }
+}
+
+/* Page content sits above the flying layer */
+#MainContent { position: relative; z-index: 1; }
+.site-footer { position: relative; z-index: 1; }
 
 /* Trust strip under hero */
 .trust-strip { font-size: 1.35rem; font-weight: 600; color: rgba(var(--color-ink), 0.75); display: flex; justify-content: center; gap: 2.8rem; flex-wrap: wrap; padding: 1.4rem 2rem; border-bottom: 0.1rem solid rgba(var(--color-ink), 0.07); }

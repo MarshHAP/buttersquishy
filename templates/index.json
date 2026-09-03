@@ -1,5 +1,14 @@
 {
   "sections": {
+    "flying_butter": {
+      "type": "flying-butter",
+      "settings": {
+        "count": 10,
+        "size": 110,
+        "speed": 26,
+        "opacity": 55
+      }
+    },
     "hero": {
       "type": "hero",
       "settings": {
@@ -244,6 +253,7 @@
     }
   },
   "order": [
+    "flying_butter",
     "hero",
     "featured_bundle",
     "parade",

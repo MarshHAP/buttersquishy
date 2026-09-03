@@ -8,7 +8,7 @@ It mirrors the section-for-section structure of the Balloon Friends store, rebra
 | Page | Sections (in order) |
 | --- | --- |
 | Every page | Announcement bar · Header (logo, Home / Shop / FAQ / Contact, basket) · Footer (brand + payment icons, quick links, newsletter) |
-| Home (`templates/index.json`) | Hero slideshow with trust strip · Featured bundle (gallery + tap-to-build bundle box) · Squish parade · Comparison table · Icon bar · Testimonials · FAQ · Contact form |
+| Home (`templates/index.json`) | Flying butter squishies background layer · Hero slideshow with trust strip · Featured bundle (gallery + tap-to-build bundle box) · Squish parade · Comparison table · Icon bar · Testimonials · FAQ · Contact form |
 | Product (`templates/product.json`) | Main product (gallery + bundle box + description) · Icon bar · Testimonials · FAQ |
 | Cart | Bundle-progress banner, line items, quantity controls, discount rows, checkout |
 | Also | Collection, list-collections, search, page, contact page, blog, article, 404, password, gift card |
@@ -34,10 +34,10 @@ assets/       base.css, theme.js
 config/       settings_schema.json, settings_data.json
 layout/       theme.liquid, password.liquid
 locales/      en.default.json
-sections/     hero, featured-bundle, squish-parade, comparison-table, icon-bar,
+sections/     flying-butter, hero, featured-bundle, squish-parade, comparison-table, icon-bar,
               testimonials, faq, contact-form, image-with-text, header, footer,
               announcement-bar, main-* (product, cart, collection, search, page, …)
-snippets/     brand-wordmark, squishy-emoji, bundle-buy-box, product-card, product-gallery
+snippets/     butter-squishy (inline SVG), brand-wordmark, squishy-emoji, bundle-buy-box, product-card, product-gallery
 templates/    index, product, cart, collection, … (JSON) and gift_card.liquid
 store-setup/  product data + admin setup steps
 ```

@@ -1,0 +1,31 @@
+{%- comment -%}
+  Inline SVG of the Butter Squishy — a pale-yellow stick of "SALTED BUTTER"
+  with navy print, drawn to match the product photography. Scales with its
+  container; decorative only (aria-hidden).
+  Accepts: class (optional extra class on the <svg>)
+{%- endcomment -%}
+<svg class="butter-squishy {{ class }}" viewBox="0 0 240 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="butter-front-{{ uid | default: 'a' }}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE98A"/>
+      <stop offset="1" stop-color="#F7DB6A"/>
+    </linearGradient>
+  </defs>
+  <!-- side face -->
+  <path d="M190 62 L228 28 Q234 24 234 32 L234 104 Q234 110 229 114 L190 140 Z" fill="#E9C54E"/>
+  <!-- top face -->
+  <path d="M22 62 L58 28 Q62 24 68 24 L226 24 Q233 24 228 29 L190 62 Z" fill="#FFF3B3"/>
+  <!-- front face -->
+  <rect x="10" y="60" width="182" height="82" rx="12" ry="12" fill="url(#butter-front-{{ uid | default: 'a' }})"/>
+  <!-- soft edge highlight -->
+  <path d="M18 66 Q18 60 24 60 L180 60" fill="none" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"/>
+  <!-- print -->
+  <g fill="#1C2B6E" font-family="'Fredoka','Nunito','Arial Black',Arial,sans-serif" font-weight="700" text-anchor="middle">
+    <text x="58" y="98" font-size="17">4<tspan font-size="11">OZ.</tspan></text>
+    <text x="58" y="112" font-size="7.5" font-weight="600">NET WT. (113 G)</text>
+    <text x="136" y="88" font-size="9" letter-spacing="1.5">SALTED</text>
+    <text x="136" y="124" font-size="30" letter-spacing="0.5">BUTTER</text>
+  </g>
+  <!-- rounded silhouette outline -->
+  <path d="M10 72 Q10 60 22 60 L58 28 Q62 24 68 24 L226 24 Q233 24 228 29 L234 32 L234 104 Q234 110 229 114 L190 140 Q186 142 180 142 L22 142 Q10 142 10 130 Z" fill="none" stroke="#1C2B6E" stroke-opacity="0.12" stroke-width="1.5"/>
+</svg>

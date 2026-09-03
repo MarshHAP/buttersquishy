@@ -1,0 +1,45 @@
+{%- comment -%}
+  Flying butter squishies — a fixed, full-viewport layer of butter sticks
+  drifting up and tumbling behind the page content. Pointer-events are off
+  so it never gets in the way; motion is disabled for users who prefer
+  reduced motion.
+{%- endcomment -%}
+
+{%- assign count = section.settings.count | default: 10 -%}
+{%- assign base_size = section.settings.size | default: 110 -%}
+{%- assign base_duration = section.settings.speed | default: 26 -%}
+
+<div class="flying-butter" aria-hidden="true" style="--fb-opacity: {{ section.settings.opacity | default: 55 | divided_by: 100.0 }};">
+  {%- for i in (1..count) -%}
+    {%- comment -%} Deterministic pseudo-random spread so the layout is stable across renders. {%- endcomment -%}
+    {%- assign left = i | times: 37 | plus: 11 | modulo: 100 -%}
+    {%- assign delay = i | times: 7 | modulo: base_duration | times: -1 -%}
+    {%- assign dur = i | times: 5 | modulo: 14 | plus: base_duration -%}
+    {%- assign scale = i | times: 13 | modulo: 7 | plus: 6 -%}
+    {%- assign size = base_size | times: scale | divided_by: 10 -%}
+    {%- assign tilt = i | times: 53 | modulo: 60 | minus: 30 -%}
+    {%- assign spin = i | modulo: 2 -%}
+    {%- assign rest_top = i | times: 41 | modulo: 88 | plus: 4 -%}
+    <span
+      class="flying-butter__item {% if spin == 0 %}flying-butter__item--reverse{% endif %}"
+      style="left: {{ left }}%; width: {{ size }}px; animation-duration: {{ dur }}s; animation-delay: {{ delay }}s; --fb-tilt: {{ tilt }}deg; --fb-top: {{ rest_top }}%;"
+    >
+      {% render 'butter-squishy', uid: i %}
+    </span>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Flying butter squishies",
+  "settings": [
+    { "type": "paragraph", "content": "A layer of butter squishies floating behind the page content. Add it to the home page once; position in the section list doesn't matter." },
+    { "type": "range", "id": "count", "label": "How many", "min": 4, "max": 20, "step": 1, "default": 10 },
+    { "type": "range", "id": "size", "label": "Base size (px)", "min": 60, "max": 200, "step": 10, "default": 110 },
+    { "type": "range", "id": "speed", "label": "Drift time (seconds to cross the screen)", "min": 14, "max": 60, "step": 2, "default": 26 },
+    { "type": "range", "id": "opacity", "label": "Opacity (%)", "min": 10, "max": 100, "step": 5, "default": 55 }
+  ],
+  "presets": [{ "name": "Flying butter squishies" }],
+  "enabled_on": { "templates": ["index"] }
+}
+{% endschema %}
