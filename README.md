@@ -30,14 +30,14 @@ exact checkout price before they add to basket.
 ## Files
 
 ```
-assets/       base.css, theme.js
+assets/       base.css, theme.js, butter-01.png … butter-10.png (transparent cutouts)
 config/       settings_schema.json, settings_data.json
 layout/       theme.liquid, password.liquid
 locales/      en.default.json
 sections/     flying-butter, hero, featured-bundle, squish-parade, comparison-table, icon-bar,
               testimonials, faq, contact-form, image-with-text, header, footer,
               announcement-bar, main-* (product, cart, collection, search, page, …)
-snippets/     butter-squishy (inline SVG), brand-wordmark, squishy-emoji, bundle-buy-box, product-card, product-gallery
+snippets/     butter-image (10 PNG cutouts), brand-wordmark, squishy-emoji, bundle-buy-box, product-card, product-gallery
 templates/    index, product, cart, collection, … (JSON) and gift_card.liquid
 store-setup/  product data + admin setup steps
 ```
@@ -55,5 +55,5 @@ shopify theme push --unpublished
 
 Every image slot degrades gracefully: variants without photos show an emoji from
 `snippets/squishy-emoji.liquid`, and the hero falls back to a butter-yellow gradient with floating
-squishies. Upload photos in the theme editor (hero slides, logo, favicon) and on the product
+squishies. The hero banner, scrolling parade and flying background use the ten butter cutouts in `assets/`. Upload photos in the theme editor (hero slides, logo, favicon) and on the product
 (one image per variant) to replace them.

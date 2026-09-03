@@ -1,32 +1,48 @@
 {%- assign product = all_products[section.settings.product] -%}
+{%- assign use_product = false -%}
+{%- if section.settings.source == 'product' and product != blank and product.variants.size > 0 -%}{%- assign use_product = true -%}{%- endif -%}
 
 <div class="parade" aria-hidden="true">
-  {%- if product != blank and product.variants.size > 0 -%}
-    <a class="parade__link" href="{{ product.url }}#bundle" tabindex="-1">
-      <div class="parade__track" style="--parade-duration: {{ section.settings.speed }}s;">
-        {%- for copy in (1..2) -%}
-          <div class="parade__group">
+  <a class="parade__link" href="{% if product != blank %}{{ product.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}#bundle" tabindex="-1">
+    <div class="parade__track" style="--parade-duration: {{ section.settings.speed }}s;">
+      {%- for copy in (1..2) -%}
+        <div class="parade__group">
+          {%- if use_product -%}
             {%- for variant in product.variants -%}
               <span class="parade__pet">
                 {%- if variant.featured_image -%}
                   <img src="{{ variant.featured_image | image_url: width: 300 }}" alt="" loading="lazy" width="150" height="150">
                 {%- else -%}
-                  <span>{% render 'squishy-emoji', title: variant.title %}</span>
+                  {% render 'butter-image', index: forloop.index, width: 300 %}
                 {%- endif -%}
               </span>
             {%- endfor -%}
-          </div>
-        {%- endfor -%}
-      </div>
-    </a>
-  {%- endif -%}
+          {%- else -%}
+            {%- for i in (1..10) -%}
+              <span class="parade__pet">{% render 'butter-image', index: i, width: 300 %}</span>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </a>
 </div>
 
 {% schema %}
 {
   "name": "Squish parade",
   "settings": [
-    { "type": "product", "id": "product", "label": "Product" },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Images",
+      "options": [
+        { "value": "butters", "label": "Butter squishy cutouts" },
+        { "value": "product", "label": "Product variant photos" }
+      ],
+      "default": "butters"
+    },
+    { "type": "product", "id": "product", "label": "Product (link target / variant photos)" },
     {
       "type": "range",
       "id": "speed",

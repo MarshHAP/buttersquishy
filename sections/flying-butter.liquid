@@ -1,6 +1,7 @@
 {%- comment -%}
   Flying butter squishies — a fixed, full-viewport layer of butter sticks
-  drifting up and tumbling behind the page content. Pointer-events are off
+  drifting up and tumbling behind the page content, using the ten
+  transparent butter cutouts in assets/butter-*.png. Pointer-events are off
   so it never gets in the way; motion is disabled for users who prefer
   reduced motion.
 {%- endcomment -%}
@@ -24,7 +25,7 @@
       class="flying-butter__item {% if spin == 0 %}flying-butter__item--reverse{% endif %}"
       style="left: {{ left }}%; width: {{ size }}px; animation-duration: {{ dur }}s; animation-delay: {{ delay }}s; --fb-tilt: {{ tilt }}deg; --fb-top: {{ rest_top }}%;"
     >
-      {% render 'butter-squishy', uid: i %}
+      {% render 'butter-image', index: i, width: 400 %}
     </span>
   {%- endfor -%}
 </div>

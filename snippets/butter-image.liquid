@@ -1,0 +1,11 @@
+{%- comment -%}
+  Outputs one of the ten transparent butter-squishy cutouts (assets/butter-01.png … butter-10.png).
+  Accepts:
+    index  — any integer; wraps around the ten images
+    width  — intrinsic width attribute hint (default 320)
+    class  — optional class on the <img>
+{%- endcomment -%}
+{%- assign n = index | default: 1 | minus: 1 | modulo: 10 | plus: 1 -%}
+{%- if n >= 10 -%}{%- assign file = 'butter-' | append: n -%}{%- else -%}{%- assign file = 'butter-0' | append: n -%}{%- endif -%}
+{%- assign file = file | append: '.png' -%}
+<img src="{{ file | asset_url }}" alt="" class="{{ class }}" width="{{ width | default: 320 }}" height="{{ width | default: 320 | times: 0.95 | round }}" loading="lazy" decoding="async" draggable="false">

@@ -246,7 +246,8 @@ img { max-width: 100%; height: auto; }
   filter: drop-shadow(0 0.6rem 1.2rem rgba(28, 43, 110, 0.18));
   --blob-tilt: -10deg;
 }
-.hero__blob svg { width: 100%; height: auto; display: block; }
+.hero__blob img { width: 100%; height: auto; display: block; }
+.hero__blob--bottom { transform-origin: 50% 50%; }
 @keyframes squish {
   0%, 100% { transform: rotate(var(--blob-tilt)) scale(1, 1) translateY(0); }
   30% { transform: rotate(var(--blob-tilt)) scale(1.12, 0.86) translateY(0.6rem); }
@@ -280,7 +281,7 @@ img { max-width: 100%; height: auto; }
   filter: drop-shadow(0 0.8rem 1.6rem rgba(28, 43, 110, 0.12));
 }
 .flying-butter__item--reverse { animation-name: butter-fly-reverse; }
-.flying-butter__item svg { width: 100%; height: auto; display: block; }
+.flying-butter__item img { width: 100%; height: auto; display: block; }
 @keyframes butter-fly {
   0%   { transform: translate3d(0, 0, 0) rotate(var(--fb-tilt, 0deg)); }
   50%  { transform: translate3d(6vw, -60vh, 0) rotate(calc(var(--fb-tilt, 0deg) + 180deg)); }
@@ -454,7 +455,7 @@ img { max-width: 100%; height: auto; }
 
 /* Squish parade banner */
 .parade {
-  background: rgb(var(--color-butter));
+  background: rgba(var(--color-butter), 0.85);
   overflow: hidden;
   padding: 2.4rem 0;
   border-top: 0.1rem solid rgba(var(--color-ink), 0.06);
@@ -477,7 +478,7 @@ img { max-width: 100%; height: auto; }
   transform-origin: 50% 100%;
   animation: parade-squish 1.6s ease-in-out infinite;
 }
-.parade__pet img { height: 9.6rem; width: auto; display: block; }
+.parade__pet img { height: 9.6rem; width: auto; display: block; filter: drop-shadow(0 0.6rem 1rem rgba(28, 43, 110, 0.14)); }
 .parade__pet span { font-size: 7.2rem; line-height: 1; }
 @media (max-width: 749px) { .parade__pet img { height: 6.8rem; } .parade__pet span { font-size: 5.2rem; } .parade__group { gap: 3.2rem; padding-right: 3.2rem; } }
 .parade__pet:nth-child(2n) { animation-delay: 0.2s; }
