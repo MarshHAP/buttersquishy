@@ -8,8 +8,8 @@ It mirrors the section-for-section structure of the Balloon Friends store, rebra
 | Page | Sections (in order) |
 | --- | --- |
 | Every page | Announcement bar · Header (logo, Home / Shop / FAQ / Contact, basket) · Footer (brand + payment icons, quick links, newsletter) |
-| Home (`templates/index.json`) | Flying butter squishies background layer · Hero slideshow with trust strip · Featured product (gallery + feature tiles + tiered buy box + Squeeze Me / See Me) · Squish parade · Comparison table · Icon bar · Testimonials · FAQ · Contact form |
-| Product (`templates/product.json`) | Main product (thumbnail rail + gallery + feature tiles, accordions for description / FAQ / shipping, tiered buy box, Squeeze Me / See Me) · Icon bar · Testimonials |
+| Home (`templates/index.json`) | Flying butter squishies background layer · Hero slideshow with trust strip · Featured product (gallery + feature tiles + tiered buy box + Squeeze Me) · Squish parade · Comparison table · Icon bar · Testimonials · FAQ · Contact form |
+| Product (`templates/product.json`) | Main product (thumbnail rail + gallery + feature tiles, accordions for description / FAQ / shipping, tiered buy box, Squeeze Me) · Icon bar · Testimonials |
 | Cart | Bundle-progress banner, line items, quantity controls, discount rows, checkout |
 | Also | Collection, list-collections, search, page, contact page, blog, article, 404, password, gift card |
 
@@ -52,14 +52,11 @@ shopify theme check
 shopify theme push --unpublished
 ```
 
-## Squeeze Me / See Me
+## Squeeze Me
 
-`snippets/squeeze-me.liquid` renders two panels under the buy box. **Squeeze Me** is a floating butter
-cutout that dimples where you tap and slowly rises back. **See Me** is a butter-shaped tile with a camera
-icon; tapping it opens the phone's rear camera (via `getUserMedia`, so it needs HTTPS and permission)
-and overlays the butter on the live view, where it can be dragged, pinch-resized and squeezed. It is a
-camera overlay rather than world-tracked AR: the butter sits on top of the video, it is not occluded by
-fingers.
+`snippets/squeeze-me.liquid` renders a full-width panel under the buy box with a large floating butter
+cutout that dimples where you tap and slowly rises back over about 2.5 seconds. Toggle it and pick which
+cutout to use in the section settings.
 
 ## Placeholder images
 

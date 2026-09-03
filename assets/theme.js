@@ -182,7 +182,6 @@
 
   function makeSqueezable(body) {
     body.addEventListener('pointerdown', function (e) {
-      if (body._dragging) return;
       squeezeAt(body, e.clientX, e.clientY);
     });
     body.addEventListener('keydown', function (e) {
@@ -194,114 +193,6 @@
     });
   }
   document.querySelectorAll('[data-squeeze] [data-squeeze-body]').forEach(makeSqueezable);
-
-  /* ------------------------------------------------------------------ */
-  /* See Me — rear camera + draggable, pinchable, squeezable butter      */
-  /* ------------------------------------------------------------------ */
-  (function () {
-    var ar = document.querySelector('[data-ar]');
-    if (!ar) return;
-    var video = ar.querySelector('[data-ar-video]');
-    var stage = ar.querySelector('[data-ar-stage]');
-    var butter = ar.querySelector('[data-ar-butter]');
-    var body = ar.querySelector('[data-squeeze-body]');
-    var img = ar.querySelector('[data-ar-img]');
-    var msg = ar.querySelector('[data-ar-msg]');
-    var stream = null;
-    var pos = { x: 0, y: 0, scale: 1 };
-    var pointers = {};
-    var gesture = null;
-
-    function apply() {
-      butter.style.transform = 'translate(-50%, -50%) translate(' + pos.x + 'px, ' + pos.y + 'px) scale(' + pos.scale + ')';
-    }
-
-    function open(src) {
-      if (src) img.src = src;
-      pos = { x: 0, y: 0, scale: 1 };
-      apply();
-      ar.classList.add('is-open');
-      ar.classList.remove('has-error');
-      ar.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        return fail('Your browser can’t open the camera here. Try Safari or Chrome on your phone.');
-      }
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false })
-        .then(function (s) {
-          stream = s;
-          video.srcObject = s;
-          return video.play();
-        })
-        .catch(function () {
-          fail('We need camera access to show the butter in your room. Allow the camera and try again.');
-        });
-    }
-
-    function fail(text) {
-      msg.textContent = text;
-      ar.classList.add('has-error');
-    }
-
-    function close() {
-      ar.classList.remove('is-open');
-      ar.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
-      video.srcObject = null;
-    }
-
-    document.addEventListener('click', function (e) {
-      var btn = e.target.closest('[data-seeme-open]');
-      if (btn) {
-        var play = btn.closest('[data-play]');
-        open(play ? play.dataset.butterSrc : '');
-      }
-      if (e.target.closest('[data-ar-close]')) close();
-    });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ar.classList.contains('is-open')) close(); });
-
-    /* Gestures on the stage: 1 pointer = drag (or tap → squeeze), 2 pointers = pinch to resize */
-    stage.addEventListener('pointerdown', function (e) {
-      stage.setPointerCapture(e.pointerId);
-      pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
-      var ids = Object.keys(pointers);
-      if (ids.length === 1) {
-        gesture = { type: 'drag', startX: e.clientX, startY: e.clientY, baseX: pos.x, baseY: pos.y, moved: false };
-      } else if (ids.length === 2) {
-        var a = pointers[ids[0]], b = pointers[ids[1]];
-        gesture = { type: 'pinch', startDist: Math.hypot(a.x - b.x, a.y - b.y), baseScale: pos.scale };
-      }
-    });
-    stage.addEventListener('pointermove', function (e) {
-      if (!pointers[e.pointerId] || !gesture) return;
-      pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
-      if (gesture.type === 'drag') {
-        var dx = e.clientX - gesture.startX, dy = e.clientY - gesture.startY;
-        if (Math.hypot(dx, dy) > 6) gesture.moved = true;
-        if (gesture.moved) { pos.x = gesture.baseX + dx; pos.y = gesture.baseY + dy; apply(); }
-      } else if (gesture.type === 'pinch') {
-        var ids = Object.keys(pointers);
-        if (ids.length < 2) return;
-        var a = pointers[ids[0]], b = pointers[ids[1]];
-        var dist = Math.hypot(a.x - b.x, a.y - b.y);
-        pos.scale = Math.min(3, Math.max(0.35, gesture.baseScale * (dist / gesture.startDist)));
-        apply();
-      }
-    });
-    function endPointer(e) {
-      var wasTap = gesture && gesture.type === 'drag' && !gesture.moved;
-      delete pointers[e.pointerId];
-      if (wasTap) {
-        var r = body.getBoundingClientRect();
-        var inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
-        if (inside) squeezeAt(body, e.clientX, e.clientY);
-      }
-      if (Object.keys(pointers).length === 0) gesture = null;
-    }
-    stage.addEventListener('pointerup', endPointer);
-    stage.addEventListener('pointercancel', endPointer);
-  })();
 
   /* ------------------------------------------------------------------ */
   /* Product gallery thumbnails                                          */

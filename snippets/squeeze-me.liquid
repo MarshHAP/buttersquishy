@@ -1,35 +1,24 @@
 {%- comment -%}
-  "Squeeze Me" + "See Me" panels shown under the buy box.
-  Accepts: show_squeeze (bool), show_see (bool), butter (1–10, which cutout to use)
+  "Squeeze Me" panel shown under the buy box: a large floating butter that
+  dimples where you tap and slowly rises back.
+  Accepts: show_squeeze (bool), butter (1–10, which cutout to use)
 {%- endcomment -%}
 {%- assign n = butter | default: 3 -%}
 {%- if n >= 10 -%}{%- assign file = 'butter-' | append: n | append: '.png' -%}{%- else -%}{%- assign file = 'butter-0' | append: n | append: '.png' -%}{%- endif -%}
 {%- assign src = file | asset_url -%}
-{%- if show_squeeze or show_see -%}
-<div class="play" style="--squeeze-mask: url('{{ src }}'); --seeme-mask: url('{{ src }}');" data-play data-butter-src="{{ src }}">
-  {%- if show_squeeze -%}
-    <div class="play__panel">
-      <span class="play__label">Squeeze Me</span>
-      <div class="squeeze" data-squeeze>
-        <div class="squeeze__float">
-          <div class="squeeze__body" data-squeeze-body role="button" tabindex="0" aria-label="Squeeze the butter">
-            <img src="{{ src }}" alt="" width="560" height="540" draggable="false">
-            <div class="squeeze__dimples" data-dimples></div>
-          </div>
+{%- if show_squeeze -%}
+<div class="play" style="--squeeze-mask: url('{{ src }}');" data-play>
+  <div class="play__panel">
+    <span class="play__label">Squeeze Me</span>
+    <div class="squeeze" data-squeeze>
+      <div class="squeeze__float">
+        <div class="squeeze__body" data-squeeze-body role="button" tabindex="0" aria-label="Squeeze the butter">
+          <img src="{{ src }}" alt="" width="560" height="540" draggable="false">
+          <div class="squeeze__dimples" data-dimples></div>
         </div>
       </div>
-      <p class="play__hint">Tap anywhere on the butter — watch it slowly rise back.</p>
     </div>
-  {%- endif -%}
-  {%- if show_see -%}
-    <div class="play__panel">
-      <span class="play__label">See Me</span>
-      <button type="button" class="seeme" data-seeme-open aria-label="Open your camera and see the butter in your room">
-        <span class="seeme__shape" aria-hidden="true"></span>
-        <span class="seeme__cam" aria-hidden="true">{% render 'icon', name: 'camera' %}</span>
-      </button>
-      <p class="play__hint">Open your camera and hold the butter in your hand.</p>
-    </div>
-  {%- endif -%}
+    <p class="play__hint">Tap anywhere on the butter — watch it slowly rise back.</p>
+  </div>
 </div>
 {%- endif -%}

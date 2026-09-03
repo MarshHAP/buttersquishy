@@ -47,7 +47,7 @@
 
       <div class="product-grid__buy">
         {% render 'buy-box', product: product, tagline: section.settings.tagline, heading_tag: 'h1' %}
-        {% render 'squeeze-me', show_squeeze: section.settings.show_squeeze, show_see: section.settings.show_see, butter: section.settings.play_butter %}
+        {% render 'squeeze-me', show_squeeze: section.settings.show_squeeze, butter: section.settings.play_butter %}
       </div>
     </div>
   </div>
@@ -75,9 +75,8 @@
 {
   "name": "Product",
   "settings": [
-    { "type": "header", "content": "Squeeze Me / See Me" },
+    { "type": "header", "content": "Squeeze Me" },
     { "type": "checkbox", "id": "show_squeeze", "label": "Show “Squeeze Me” panel", "default": true },
-    { "type": "checkbox", "id": "show_see", "label": "Show “See Me” camera panel", "default": true },
     { "type": "range", "id": "play_butter", "label": "Which butter cutout (1–10)", "min": 1, "max": 10, "step": 1, "default": 3 },
     { "type": "text", "id": "tagline", "label": "Tagline (under the title)", "default": "The prank that doubles as the most satisfying stress toy on your desk." },
     { "type": "header", "content": "Accordions" },
