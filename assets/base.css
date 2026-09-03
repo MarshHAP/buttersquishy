@@ -314,11 +314,9 @@ img { max-width: 100%; height: auto; }
 
 /* Squish parade banner */
 .parade {
-  background: rgb(var(--color-butter));
+  background: transparent;
   overflow: hidden;
   padding: 2.4rem 0;
-  border-top: 0.1rem solid rgba(var(--color-ink), 0.06);
-  border-bottom: 0.1rem solid rgba(var(--color-ink), 0.06);
 }
 .parade__link { display: block; text-decoration: none; }
 .parade__track {
