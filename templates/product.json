@@ -65,6 +65,13 @@
             "question": "What if I don’t love it?",
             "answer": "<p>Every order is covered by our 30-day money-back guarantee. If you’re not happy, we’ll refund you in full — no questions asked.</p>"
           }
+        },
+        "faq_size": {
+          "type": "faq",
+          "settings": {
+            "question": "How big is it?",
+            "answer": "<p>11 cm × 3 cm (4.33 × 1.18 in) — exactly the size of a real 4 oz stick of butter, so it looks the part in the fridge and fits a pocket or pencil case.</p>"
+          }
         }
       },
       "block_order": [
@@ -75,6 +82,7 @@
         "faq2",
         "faq3",
         "faq4",
+        "faq_size",
         "faq5",
         "faq6"
       ],
